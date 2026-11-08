@@ -948,6 +948,19 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
 :root[data-mode="light"] .wm-dot.is-open::after { border-color: #A8823A; }
 :root[data-mode="light"] .wm-ld { background: #A8823A; box-shadow: 0 0 0 3px rgba(168, 130, 58, 0.22), 0 0 12px rgba(168, 130, 58, 0.5); }
 :root[data-mode="light"] .wm-ld::after { border-color: #A8823A; }
+/* light mode: city names get a pale halo so they read on navy countries and on the pale sea alike */
+:root[data-mode="light"] .wm-label { color: #0F2238; text-shadow: 0 0 2px #F3F5F8, 0 0 2px #F3F5F8, 0 0 3px #F3F5F8, 0 0 3px #F3F5F8, 0 0 5px #F3F5F8, 0 0 6px rgba(243, 245, 248, 0.9); }
+:root[data-mode="light"] .wm.zoomed .wm-label { opacity: 1; }
+:root[data-mode="light"] .wm-label i { opacity: 0.9; }
+/* light mode map: soft navy tint, navy outlines, gold open dots, white closed dots */
+:root[data-mode="light"] .wm-ct { fill: #CBD8E8; fill-opacity: 1; stroke: #15304F; stroke-width: 1px; stroke-opacity: 0.75; }
+:root[data-mode="light"] .wm-land, :root[data-mode="light"] .wm-ctb { fill: #E7EAF0; fill-opacity: 1; }
+:root[data-mode="light"] .wm-dot::before { background: #fff; border: 1.5px solid #15304F; }
+:root[data-mode="light"] .wm-dot.is-open::before { background: #B8902F; border: 1.5px solid #15304F; box-shadow: 0 0 0 3px rgba(184, 144, 47, 0.25), 0 0 12px rgba(184, 144, 47, 0.5); }
+:root[data-mode="light"] .wm-dot.is-open::after { border-color: #B8902F; }
+:root[data-mode="light"] .wm-ld { background: #B8902F; box-shadow: 0 0 0 3px rgba(184, 144, 47, 0.25), 0 0 12px rgba(184, 144, 47, 0.5); }
+:root[data-mode="light"] .wm-ld::after { border-color: #B8902F; }
+:root[data-mode="light"] .wm-label { text-shadow: none; }
 </style>
 </head>
 <body>
