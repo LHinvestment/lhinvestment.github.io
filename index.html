@@ -537,40 +537,40 @@ footer p:first-child { color: var(--band-fg); }
 @media (max-width: 350px) { header.top.scrolled nav { gap: 0 8px; } header.top.scrolled nav a { font-size: 12.5px; } }
 
 /* library page */
-#view-library button { font: inherit; cursor: pointer; }
+#view-library button { font-family: inherit; cursor: pointer; }
 .lib-shelf { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-.lib-shelf article { position: relative; padding: 26px 24px 24px; border: 1px solid var(--gold-line); border-radius: 6px; background: var(--surface); display: grid; gap: 8px; align-content: start; }
-.lib-shelf .no { font-family: var(--font-display); font-size: 38px; color: var(--gold-text); line-height: 1; }
-.lib-shelf h3, .lib-book h3 { font-size: 20px; margin: 0; }
-.lib-book h3 { font-size: 18px; }
-.lib-shelf .by, .lib-book .by { font-size: 14px; color: var(--muted); }
-.lib-shelf .why, .lib-book .why { font-size: 14.5px; line-height: 1.5; margin: 0; }
-.lib-shelf .tagrow, .lib-book .tagrow { display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
+.lib-shelf article { position: relative; padding: 16px 20px 16px; border: 1px solid var(--gold-line); border-radius: 6px; background: var(--surface); display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-content: start; align-items: baseline; }
+.lib-shelf article > :not(.no):not(h3) { grid-column: 1 / -1; }
+.lib-shelf .no { font-family: var(--font-display); font-size: 22px; color: var(--gold-text); line-height: 1; }
+.lib-shelf h3, .lib-book h3 { font-size: 17px; margin: 0; }
+.lib-shelf .by, .lib-book .by { font-size: 13.5px; color: var(--muted); }
+.lib-shelf .why, .lib-book .why { font-size: 14px; line-height: 1.5; margin: 0; }
+.lib-shelf .tagrow, .lib-book .tagrow { display: flex; gap: 6px; margin-top: 4px; flex-wrap: wrap; }
 .lib-shelf .tg, .lib-book .tg { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 4px 9px; border: 1px solid var(--gold-line); border-radius: 3px; color: var(--muted); }
 .lib-shelf .tg.lv, .lib-book .tg.lv { color: var(--gold-text); border-color: var(--gold-text); }
-.lib-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; }
-.lib-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.lib-chip { color: var(--fg); font-size: 13px; font-weight: 500; padding: 8px 14px; border: 1px solid var(--gold-line); border-radius: 999px; background: transparent; transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease; }
-.lib-chip:hover, .lib-seg button:hover { border-color: var(--gold-text); }
-.lib-chip[aria-pressed="true"], .lib-seg button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
-.lib-seg { display: inline-flex; margin-left: auto; border: 1px solid var(--gold-line); border-radius: 999px; overflow: hidden; }
-.lib-seg button { font-size: 13px; font-weight: 500; padding: 8px 14px; border: 0; border-radius: 0; background: transparent; color: var(--muted); }
-.lib-seg button + button { border-left: 1px solid var(--gold-line); }
-.lib-seg button[aria-pressed="true"] { color: var(--bg); }
-.lib-chip:focus-visible, .lib-seg button:focus-visible { outline: 2px solid var(--gold-text); outline-offset: 2px; }
-.lib-count { margin: 22px 0 0; font-size: 13.5px; color: var(--muted); }
-.lib-books { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 14px; }
+.lib-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; }
+.lib-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.lib-chip { color: var(--fg); font-size: 12.5px; font-weight: 500; padding: 6px 12px; border: 1px solid var(--gold-line); border-radius: 999px; background: transparent; transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease; }
+.lib-chip:hover { border-color: var(--gold-text); }
+.lib-chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.lib-sel { position: relative; display: inline-block; }
+.lib-sel select { appearance: none; -webkit-appearance: none; font-family: inherit; font-size: 12.5px; font-weight: 500; color: var(--fg); background: transparent; border: 1px solid var(--gold-line); border-radius: 999px; padding: 6px 32px 6px 14px; cursor: pointer; }
+.lib-sel select:hover { border-color: var(--gold-text); }
+.lib-sel select option { background: var(--surface); color: var(--fg); }
+.lib-sel::after { content: ""; position: absolute; right: 14px; top: 50%; width: 5px; height: 5px; border-right: 1.5px solid var(--fg); border-bottom: 1.5px solid var(--fg); transform: translateY(-72%) rotate(45deg); pointer-events: none; }
+.lib-chip:focus-visible, .lib-sel select:focus-visible { outline: 2px solid var(--gold-text); outline-offset: 2px; }
+.lib-books { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 24px; }
 .lib-book { padding: 22px 22px 20px; border: 1px solid var(--gold-line); border-top: 3px solid var(--gold-text); border-radius: 6px; background: var(--surface); display: grid; gap: 7px; align-content: start; }
 .lib-book[hidden] { display: none; }
 .lib-empty { margin: 18px 0 0; color: var(--muted); }
 #members-picks .sec-head { grid-template-columns: minmax(0, 320px) minmax(0, 1fr); }
 @media (max-width: 760px) { #members-picks .sec-head { grid-template-columns: minmax(0, 1fr); } }
 .lib-mp { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-.lib-mp figure { margin: 0; padding: 26px 26px 24px; border: 1px solid var(--band-rule); border-radius: 6px; background: rgba(255,255,255,.04); }
-.lib-mp blockquote { margin: 0 0 16px; font-family: var(--font-display); font-size: 20px; line-height: 1.4; color: var(--band-fg); }
+.lib-mp figure { margin: 0; padding: 18px 20px 16px; border: 1px solid var(--band-rule); border-radius: 6px; background: rgba(255,255,255,.04); }
+.lib-mp blockquote { margin: 0 0 12px; font-family: var(--font-display); font-size: 16.5px; line-height: 1.45; color: var(--band-fg); }
 .lib-mp figure { display: flex; flex-direction: column; }
 .lib-mp blockquote { flex: 1 1 auto; }
-.lib-mp figcaption { font-size: 15px; font-weight: 600; color: var(--band-gold); }
+.lib-mp figcaption { font-size: 14px; font-weight: 600; color: var(--band-gold); }
 .lib-az { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 24px; }
 .lib-az button { min-width: 34px; height: 34px; padding: 0 10px; border: 1px solid transparent; border-radius: 4px; background: transparent; color: var(--muted); font-size: 13px; font-weight: 500; }
 .lib-az button:hover { border-color: var(--gold-text); color: var(--fg); }
@@ -594,11 +594,8 @@ footer p:first-child { color: var(--band-fg); }
   .lib-shelf, .lib-books, .lib-gl, .lib-mp { grid-template-columns: minmax(0, 1fr); }
   .lib-shelf article:last-child { grid-column: auto; }
   .lib-gl { gap: 0; }
-  .lib-seg { display: flex; width: 100%; margin-left: 0; }
-  .lib-seg button { flex: 1 1 auto; padding: 9px 6px; font-size: 12.5px; white-space: nowrap; }
+  .lib-sel, .lib-sel select { width: 100%; }
 }
-@media (max-width: 400px) { .lib-seg button { padding: 9px 5px; font-size: 12px; } }
-@media (max-width: 350px) { .lib-lv { display: none; } }
 
 /* strategy page */
 #view-strategy[hidden] { display: none; }
@@ -866,7 +863,20 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
 .wm-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .wm.is-list .wm-wrap, .wm.is-list .wm-chips, .wm.is-list .wm-zn { display: none; }
 .wm-list { display: none; }
-.wm.is-list .wm-list { display: block; }
+.wm.is-list .wm-list { display: flex; flex-direction: column; overflow: hidden; }
+.wm-lbody { position: relative; flex: 1 1 auto; min-height: 0; overflow: hidden; }
+.wm-lmeas { position: absolute; left: 0; top: 0; margin: 0; padding: 0; visibility: hidden; pointer-events: none; }
+.wm-lpager { flex: none; box-sizing: border-box; height: 46px; padding-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.wm-lcount { margin: 0; font-size: 12.5px; color: var(--band-muted); }
+.wm-lbtns { display: flex; gap: 8px; }
+.wm-lbtns[hidden] { display: none; }
+.wm-lbtns button { all: unset; box-sizing: border-box; cursor: pointer; padding: 6px 14px; border: 1px solid var(--band-rule); border-radius: 999px; font-size: 12.5px; font-weight: 500; color: var(--band-fg); -webkit-tap-highlight-color: transparent; }
+.wm-lbtns button:hover:not(:disabled) { border-color: var(--band-gold); }
+.wm-lbtns button:disabled { opacity: 0.4; cursor: default; }
+.wm-lbtns button:focus-visible { outline: 2px solid var(--band-gold); outline-offset: 2px; }
+/* the list is exactly as tall as the map on laptops and tablets; phones get a fixed height of their own */
+@media (min-width: 761px) { .wm.is-list .wm-list { aspect-ratio: 1000 / 520; width: 100%; max-width: 1280px; margin-inline: auto; } }
+@media (max-width: 760px) { .wm.is-list .wm-list { height: 420px; } }
 .wm-ul { margin: 0; padding: 0; display: flex; gap: 10px; align-items: flex-start; }
 .wm-col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
 .wm-li { list-style: none; }
@@ -1493,7 +1503,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
       <div class="s-copy">
         <span class="label">What we read</span>
         <h1 class="s-title">Reading list</h1>
-        <p class="s-lede">A short list of the best books on investing: value, valuation, risk and the psychology behind it all.  For first steps and advanced work alike.</p>
+        <p>A short list of the best books on investing: value, valuation, risk and the psychology behind it all. For first steps and advanced work alike.</p>
       </div>
     </div>
   </section>
@@ -1520,9 +1530,8 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
       </div>
       <div class="lib-bar">
         <div class="lib-chips" role="group" aria-label="Filter by topic"><button type="button" class="lib-chip" data-shelf="all" aria-pressed="true">All</button><button type="button" class="lib-chip" data-shelf="v" aria-pressed="false">Value investing</button><button type="button" class="lib-chip" data-shelf="b" aria-pressed="false">Business &amp; valuation</button><button type="button" class="lib-chip" data-shelf="f" aria-pressed="false">Statements &amp; risk</button><button type="button" class="lib-chip" data-shelf="p" aria-pressed="false">Portfolio &amp; markets</button><button type="button" class="lib-chip" data-shelf="m" aria-pressed="false">Mindset &amp; history</button></div>
-        <div class="lib-seg" role="group" aria-label="Filter by level"><button type="button" data-level="all" aria-pressed="true">All<span class="lib-lv"> levels</span></button><button type="button" data-level="start" aria-pressed="false">Starting out</button><button type="button" data-level="core" aria-pressed="false">Core</button><button type="button" data-level="adv" aria-pressed="false">Advanced</button></div>
+        <span class="lib-sel"><select id="lib-level" aria-label="Filter by level"><option value="all">All levels</option><option value="start">Starting out</option><option value="core">Core</option><option value="adv">Advanced</option></select></span>
       </div>
-      <p class="lib-count" id="lib-count" aria-live="polite">25 titles</p>
       <div class="lib-books" id="lib-books">
 <article class="lib-book" data-shelf="v" data-level="core"><h3>The Intelligent Investor</h3><div class="by">Benjamin Graham</div><p class="why">Margin of safety and Mr Market: the foundation of how we think.</p><div class="tagrow"><span class="tg lv">Core</span><span class="tg">Value investing</span></div></article>
 <article class="lib-book" data-shelf="v" data-level="core"><h3>Common Stocks and Uncommon Profits</h3><div class="by">Philip Fisher</div><p class="why">Qualitative research on a business, the counterpart to Graham&#x27;s numbers.</p><div class="tagrow"><span class="tg lv">Core</span><span class="tg">Value investing</span></div></article>
@@ -1551,6 +1560,10 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
 <article class="lib-book" data-shelf="m" data-level="start"><h3>Richer, Wiser, Happier</h3><div class="by">William Green</div><p class="why">Interviews with great investors about how they think.</p><div class="tagrow"><span class="tg lv">Starting out</span><span class="tg">Mindset &amp; history</span></div></article>
       </div>
       <p class="lib-empty" id="lib-empty" hidden>No titles on this shelf at this level. Try another level.</p>
+      <div class="lib-pager">
+        <p id="lib-count" aria-live="polite"></p>
+        <div class="lib-pgbtns"><button type="button" id="lib-bprev">Previous</button><button type="button" id="lib-bnext">Next</button></div>
+      </div>
     </div>
   </section>
 
@@ -1843,31 +1856,50 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
   window.addEventListener('load', update);
   update();
 
-  // library: filter the reading list by topic and level
+  // library: filter the reading list by topic and level, nine titles at a time
   (function () {
     var wrap = document.getElementById('lib-books');
     if (!wrap) return;
     var books = [].slice.call(wrap.querySelectorAll('.lib-book'));
     var chips = [].slice.call(document.querySelectorAll('.lib-chip'));
-    var segs = [].slice.call(document.querySelectorAll('.lib-seg button'));
+    var sel = document.getElementById('lib-level');
     var count = document.getElementById('lib-count');
     var empty = document.getElementById('lib-empty');
-    var shelf = 'all', level = 'all';
-    function apply() {
-      var n = 0;
-      books.forEach(function (b) {
-        var ok = (shelf === 'all' || b.getAttribute('data-shelf') === shelf) && (level === 'all' || b.getAttribute('data-level') === level);
-        b.hidden = !ok;
-        if (ok) n++;
+    var prev = document.getElementById('lib-bprev'), next = document.getElementById('lib-bnext');
+    var mq = window.matchMedia('(max-width: 1000px)');
+    var shelf = 'all', level = 'all', page = 0, maxH = 0;
+    function render() {
+      var list = books.filter(function (b) {
+        return (shelf === 'all' || b.getAttribute('data-shelf') === shelf) && (level === 'all' || b.getAttribute('data-level') === level);
       });
-      count.textContent = n === books.length ? books.length + ' titles' : n + ' of ' + books.length + ' titles';
-      empty.hidden = n !== 0;
+      var size = mq.matches ? 6 : 9;
+      var pages = Math.max(1, Math.ceil(list.length / size));
+      if (page > pages - 1) page = pages - 1;
+      var from = page * size, to = Math.min(list.length, from + size);
+      wrap.style.minHeight = '';
+      books.forEach(function (b) { b.hidden = true; });
+      list.slice(from, to).forEach(function (b) { b.hidden = false; });
+      count.textContent = list.length + (list.length === 1 ? ' title' : ' titles') + (pages > 1 ? ' \u00b7 page ' + (page + 1) + ' of ' + pages : '');
+      empty.hidden = list.length !== 0;
+      prev.disabled = page === 0; next.disabled = page >= pages - 1;
+      prev.parentNode.hidden = pages === 1;
+      // keep the list the same height from page to page, so the buttons stay put
+      if (pages > 1) {
+        if (to - from === size) maxH = Math.max(maxH, wrap.offsetHeight);
+        if (maxH) wrap.style.minHeight = maxH + 'px';
+      }
     }
-    function pick(list, attr, val) {
-      list.forEach(function (o) { o.setAttribute('aria-pressed', o.getAttribute(attr) === val ? 'true' : 'false'); });
-    }
-    chips.forEach(function (c) { c.addEventListener('click', function () { shelf = c.getAttribute('data-shelf'); pick(chips, 'data-shelf', shelf); apply(); }); });
-    segs.forEach(function (c) { c.addEventListener('click', function () { level = c.getAttribute('data-level'); pick(segs, 'data-level', level); apply(); }); });
+    function reset() { page = 0; maxH = 0; render(); }
+    chips.forEach(function (c) { c.addEventListener('click', function () {
+      shelf = c.getAttribute('data-shelf');
+      chips.forEach(function (o) { o.setAttribute('aria-pressed', o === c ? 'true' : 'false'); });
+      reset();
+    }); });
+    sel.addEventListener('change', function () { level = sel.value; reset(); });
+    prev.addEventListener('click', function () { if (page > 0) { page--; render(); } });
+    next.addEventListener('click', function () { page++; render(); });
+    if (mq.addEventListener) mq.addEventListener('change', reset); else if (mq.addListener) mq.addListener(reset);
+    render();
   })();
 
   // library: glossary, six terms at a time with a letter filter
@@ -2628,7 +2660,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     });
     countEl.innerHTML = '<b>' + Object.keys(openKeys).length + '</b> of ' + TOTAL + '<span class="wm-dev"> developed &amp; emerging</span> markets are open now';
     applyFilters();
-    if (view === 'list') renderList();
+    if (view === 'list') renderList(true);
     if (current) render(current);
   }
 
@@ -2641,7 +2673,9 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     var sel = regSel ? regSel.value : 'world';
     return !REG[sel] || (' ' + REG[sel] + ' ').indexOf(' ' + id + ' ') > -1;
   }
-  function renderList() {
+  function renderList(keep) {
+    if (!lbody) initListUi();
+    if (!keep) listPage = 0;
     var items = dotEls.map(function (b) { return b.getAttribute('data-id'); }).filter(function (id) { return passes(id) && inRegion(id); }).map(function (id) {
       var ex = EX[id];
       return { id: id, ex: ex, o: !!state[id], flip: nextChange(ex, now), name: ttl(ex) };
@@ -2666,30 +2700,108 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
       } else h += '<p class="wm-lhrs">' + esc(hrs[0] || '') + ' ' + tlab() + '</p>';
       return h + '</li>';
     }).join('');
-    listEl.innerHTML = items.length ? '<ul class="wm-ul">' + html + '</ul>' : '<p class="wm-empty">No markets match these filters right now.</p>';
-    packList(true);
+    itemIds = items.map(function (it) { return it.id; });
+    var tmp = document.createElement('ul'); tmp.innerHTML = html;
+    lisAll = [].slice.call(tmp.children);
+    paginate(null);
   }
-  // masonry: every card goes into the shortest column, so uneven card heights leave no gaps and the order still reads left to right
-  var packN = 0, packLis = null;
-  function packList(fresh) {
-    var ul = listEl.querySelector('.wm-ul');
-    if (!ul) { packLis = null; return; }
-    if (fresh || !packLis) packLis = [].slice.call(ul.querySelectorAll('.wm-li'));
-    var w = listEl.clientWidth || 800;
-    var n = w < 600 ? 2 : Math.max(2, Math.min(4, Math.floor((w + 10) / 270)));
-    if (!fresh && n === packN && ul.children.length === n) return;
-    packN = n;
-    var cols = [], hs = [], i;
-    ul.innerHTML = '';
-    for (i = 0; i < n; i++) { var c = document.createElement('div'); c.className = 'wm-col'; ul.appendChild(c); cols.push(c); hs.push(0); }
-    packLis.forEach(function (li) {
-      var k = 0; for (i = 1; i < n; i++) if (hs[i] < hs[k] - 1) k = i;
-      cols[k].appendChild(li); hs[k] = cols[k].offsetHeight;
+  // paging: the list sits in a box exactly as tall as the map, so the section never changes height.
+  // Every card is measured, then dealt into the shortest column; when the next card will not fit, a nearby
+  // one that does is pulled forward to fill the gap, and the rest moves on to the next page.
+  var lisAll = [], itemIds = [], pages = [], listPage = 0, lbody = null, lcount = null, lprev = null, lnext = null, lbtns = null, lmeas = null;
+  var mqL = window.matchMedia ? window.matchMedia('(max-width: 760px)') : { matches: false };
+  function initListUi() {
+    listEl.innerHTML = '<div class="wm-lbody"></div><div class="wm-lpager"><p class="wm-lcount"></p><div class="wm-lbtns"><button type="button" class="wm-lprev">Previous</button><button type="button" class="wm-lnext">Next</button></div></div>';
+    lbody = listEl.querySelector('.wm-lbody'); lcount = listEl.querySelector('.wm-lcount');
+    lprev = listEl.querySelector('.wm-lprev'); lnext = listEl.querySelector('.wm-lnext'); lbtns = listEl.querySelector('.wm-lbtns');
+    lmeas = document.createElement('ul'); lmeas.className = 'wm-lmeas'; lmeas.setAttribute('aria-hidden', 'true');
+    lprev.addEventListener('click', function () { if (listPage > 0) { listPage--; drawPage(); } });
+    lnext.addEventListener('click', function () { if (listPage < pages.length - 1) { listPage++; drawPage(); } });
+  }
+  function packPages(hs, n, gap, cap) {
+    var rest = hs.map(function (_, i) { return i; }), out = [], LOOK = 8, k;
+    while (rest.length) {
+      var cols = [], ch = [], placed = 0;
+      for (k = 0; k < n; k++) { cols.push([]); ch.push(0); }
+      while (rest.length) {
+        var order = ch.map(function (_, i) { return i; }).sort(function (a, b) { return ch[a] - ch[b] || a - b; }), done = false;
+        for (var oi = 0; oi < order.length && !done; oi++) {
+          var c = order[oi];
+          for (var t = 0; t < Math.min(LOOK, rest.length); t++) {
+            var idx = rest[t], need = ch[c] + (ch[c] ? gap : 0) + hs[idx];
+            if (need <= cap + 0.5 || !placed) { cols[c].push(idx); ch[c] = need; rest.splice(t, 1); placed++; done = true; break; }
+          }
+        }
+        if (!done) break;
+      }
+      out.push(cols);
+    }
+    return out;
+  }
+  // on laptops and tablets the whole section keeps the height it has in map view: whatever extra the list controls add is taken off the list
+  function fitList() {
+    listEl.style.height = '';
+    if (mqL.matches) return;
+    var sec = root.closest('section'); if (!sec) return;
+    root.classList.remove('is-list'); var mapH = sec.offsetHeight; root.classList.add('is-list');
+    var diff = sec.offsetHeight - mapH;
+    if (diff) listEl.style.height = Math.max(220, listEl.offsetHeight - diff) + 'px';
+  }
+  function paginate(anchor) {
+    if (!lbody) return;
+    fitList();
+    if (!lisAll.length) {
+      pages = []; lbody.innerHTML = '<p class="wm-empty">No markets match these filters right now.</p>';
+      lcount.textContent = ''; lbtns.hidden = true; return;
+    }
+    var W = lbody.clientWidth, cap = lbody.clientHeight;
+    if (!W || !cap) return;
+    var gap = mqL.matches ? 8 : 10;
+    var n = mqL.matches || W < 560 ? 2 : (W < 1000 ? 3 : 4);
+    var cw = (W - gap * (n - 1)) / n;
+    lmeas.style.width = cw + 'px';
+    lbody.appendChild(lmeas);
+    lisAll.forEach(function (li) { lmeas.appendChild(li); });
+    var hs = lisAll.map(function (li) { return li.getBoundingClientRect().height; });
+    lbody.removeChild(lmeas);
+    pages = packPages(hs, n, gap, cap);
+    if (anchor) {
+      var ai = itemIds.indexOf(anchor);
+      for (var p = 0; p < pages.length; p++) if (pages[p].some(function (c) { return c.indexOf(ai) > -1; })) { listPage = p; break; }
+    }
+    if (listPage > pages.length - 1) listPage = pages.length - 1;
+    drawPage();
+  }
+  function drawPage() {
+    var pg = pages[listPage]; if (!pg) return;
+    lbody.innerHTML = '';
+    var ul = document.createElement('ul'); ul.className = 'wm-ul';
+    pg.forEach(function (col) {
+      var c = document.createElement('div'); c.className = 'wm-col';
+      col.forEach(function (i) { c.appendChild(lisAll[i]); });
+      ul.appendChild(c);
     });
+    lbody.appendChild(ul);
+    lcount.textContent = pages.length > 1 ? 'Page ' + (listPage + 1) + ' of ' + pages.length : '';
+    lprev.disabled = listPage === 0; lnext.disabled = listPage >= pages.length - 1;
+    lbtns.hidden = pages.length < 2;
   }
-  window.addEventListener('resize', function () { if (view === 'list') packList(false); });
+  function firstOnPage() {
+    var li = lbody && lbody.querySelector('.wm-li'); return li ? li.getAttribute('data-id') : null;
+  }
+  var rzT = 0;
+  window.addEventListener('resize', function () {
+    if (view !== 'list') return;
+    clearTimeout(rzT); rzT = setTimeout(function () { paginate(firstOnPage()); }, 120);
+  });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (view === 'list') paginate(firstOnPage()); });
   // on a phone the tiles are compact; tap one for the exchange name, venues and market type
-  function toggleTile(li) { var id = li.getAttribute('data-id'); expanded[id] = !expanded[id]; li.classList.toggle('is-exp', !!expanded[id]); }
+  function toggleTile(li) {
+    var id = li.getAttribute('data-id'), had = document.activeElement === li;
+    expanded[id] = !expanded[id]; li.classList.toggle('is-exp', !!expanded[id]);
+    paginate(id);
+    if (had) { var nl = lbody.querySelector('.wm-li[data-id="' + id + '"]'); if (nl) nl.focus(); }
+  }
   listEl.addEventListener('click', function (e) { var li = e.target.closest && e.target.closest('.wm-li'); if (li) toggleTile(li); });
   listEl.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('wm-li')) { e.preventDefault(); toggleTile(e.target); } });
 
@@ -2974,7 +3086,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     else if (act === 'tm') {
       press(b.parentNode, val); TM = val; setFoot();
       try { localStorage.setItem('lh-wm-time', val); } catch (x) {}
-      if (view === 'list') renderList();
+      if (view === 'list') renderList(true);
       if (current) render(current);
     }
   }
