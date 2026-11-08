@@ -526,13 +526,79 @@ footer p:first-child { color: var(--band-fg); }
 @media print { .tl-card { display: none; } .timeline.tl-pre .tl-item { opacity: 1 !important; transform: none !important; } .timeline.tl-pre .tl-student, .timeline.tl-pre .tl-plus { transform: none !important; } .tl-hint { display: none; } }
 
 /* views */
-#view-home[hidden], #view-events[hidden], #view-strategy[hidden] { display: none; }
+#view-home[hidden], #view-events[hidden], #view-strategy[hidden], #view-library[hidden] { display: none; }
 @media (prefers-reduced-motion: no-preference) {
   .view-in { animation: view-in 420ms ease both; }
   @keyframes view-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 }
 #view-events > section:first-child { border-top: 0; }
 
+
+@media (max-width: 350px) { header.top.scrolled nav { gap: 0 8px; } header.top.scrolled nav a { font-size: 12.5px; } }
+
+/* library page */
+#view-library button { font: inherit; cursor: pointer; }
+.lib-shelf { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.lib-shelf article { position: relative; padding: 26px 24px 24px; border: 1px solid var(--gold-line); border-radius: 6px; background: var(--surface); display: grid; gap: 8px; align-content: start; }
+.lib-shelf .no { font-family: var(--font-display); font-size: 38px; color: var(--gold-text); line-height: 1; }
+.lib-shelf h3, .lib-book h3 { font-size: 20px; margin: 0; }
+.lib-book h3 { font-size: 18px; }
+.lib-shelf .by, .lib-book .by { font-size: 14px; color: var(--muted); }
+.lib-shelf .why, .lib-book .why { font-size: 14.5px; line-height: 1.5; margin: 0; }
+.lib-shelf .tagrow, .lib-book .tagrow { display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
+.lib-shelf .tg, .lib-book .tg { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 4px 9px; border: 1px solid var(--gold-line); border-radius: 3px; color: var(--muted); }
+.lib-shelf .tg.lv, .lib-book .tg.lv { color: var(--gold-text); border-color: var(--gold-text); }
+.lib-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; }
+.lib-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.lib-chip { color: var(--fg); font-size: 13px; font-weight: 500; padding: 8px 14px; border: 1px solid var(--gold-line); border-radius: 999px; background: transparent; transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease; }
+.lib-chip:hover, .lib-seg button:hover { border-color: var(--gold-text); }
+.lib-chip[aria-pressed="true"], .lib-seg button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.lib-seg { display: inline-flex; margin-left: auto; border: 1px solid var(--gold-line); border-radius: 999px; overflow: hidden; }
+.lib-seg button { font-size: 13px; font-weight: 500; padding: 8px 14px; border: 0; border-radius: 0; background: transparent; color: var(--muted); }
+.lib-seg button + button { border-left: 1px solid var(--gold-line); }
+.lib-seg button[aria-pressed="true"] { color: var(--bg); }
+.lib-chip:focus-visible, .lib-seg button:focus-visible { outline: 2px solid var(--gold-text); outline-offset: 2px; }
+.lib-count { margin: 22px 0 0; font-size: 13.5px; color: var(--muted); }
+.lib-books { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 14px; }
+.lib-book { padding: 22px 22px 20px; border: 1px solid var(--gold-line); border-top: 3px solid var(--gold-text); border-radius: 6px; background: var(--surface); display: grid; gap: 7px; align-content: start; }
+.lib-book[hidden] { display: none; }
+.lib-empty { margin: 18px 0 0; color: var(--muted); }
+#members-picks .sec-head { grid-template-columns: minmax(0, 320px) minmax(0, 1fr); }
+@media (max-width: 760px) { #members-picks .sec-head { grid-template-columns: minmax(0, 1fr); } }
+.lib-mp { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.lib-mp figure { margin: 0; padding: 26px 26px 24px; border: 1px solid var(--band-rule); border-radius: 6px; background: rgba(255,255,255,.04); }
+.lib-mp blockquote { margin: 0 0 16px; font-family: var(--font-display); font-size: 20px; line-height: 1.4; color: var(--band-fg); }
+.lib-mp figure { display: flex; flex-direction: column; }
+.lib-mp blockquote { flex: 1 1 auto; }
+.lib-mp figcaption { font-size: 15px; font-weight: 600; color: var(--band-gold); }
+.lib-az { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 24px; }
+.lib-az button { min-width: 34px; height: 34px; padding: 0 10px; border: 1px solid transparent; border-radius: 4px; background: transparent; color: var(--muted); font-size: 13px; font-weight: 500; }
+.lib-az button:hover { border-color: var(--gold-text); color: var(--fg); }
+.lib-az button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.lib-pager { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 22px; }
+.lib-pager p { margin: 0; font-size: 13.5px; color: var(--muted); }
+.lib-pgbtns { display: flex; gap: 8px; }
+.lib-pgbtns button { font-size: 13px; font-weight: 500; padding: 8px 16px; border: 1px solid var(--gold-line); border-radius: 999px; background: transparent; color: var(--fg); }
+.lib-pgbtns button:hover:not(:disabled) { border-color: var(--gold-text); }
+.lib-pgbtns button:disabled { opacity: .4; cursor: default; }
+.lib-az button:focus-visible, .lib-pgbtns button:focus-visible { outline: 2px solid var(--gold-text); outline-offset: 2px; }
+.lib-gl > div[hidden] { display: none; }
+.lib-pgbtns[hidden] { display: none; }
+@media (min-width: 761px) { .lib-gl { min-height: 345px; align-content: start; } }
+.lib-gl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; margin: 0; border-top: 1px solid var(--gold-line); }
+.lib-gl > div { padding: 16px 0; border-bottom: 1px solid var(--gold-line); }
+.lib-gl dt { font-family: var(--font-display); font-size: 18px; font-weight: 600; margin: 0 0 4px; }
+.lib-gl dd { margin: 0; font-size: 14.5px; color: var(--muted); line-height: 1.5; }
+@media (max-width: 1000px) { .lib-mp { grid-template-columns: minmax(0, 1fr); } .lib-shelf, .lib-books { grid-template-columns: repeat(2, minmax(0, 1fr)); } .lib-shelf article:last-child { grid-column: 1 / -1; } }
+@media (max-width: 760px) {
+  .lib-shelf, .lib-books, .lib-gl, .lib-mp { grid-template-columns: minmax(0, 1fr); }
+  .lib-shelf article:last-child { grid-column: auto; }
+  .lib-gl { gap: 0; }
+  .lib-seg { display: flex; width: 100%; margin-left: 0; }
+  .lib-seg button { flex: 1 1 auto; padding: 9px 6px; font-size: 12.5px; white-space: nowrap; }
+}
+@media (max-width: 400px) { .lib-seg button { padding: 9px 5px; font-size: 12px; } }
+@media (max-width: 350px) { .lib-lv { display: none; } }
 
 /* strategy page */
 #view-strategy[hidden] { display: none; }
@@ -977,6 +1043,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
       <a href="#top">Home</a>
       <a href="#strategy">Strategy</a>
       <a href="#events">Events</a>
+      <a href="#library">Library</a>
     </nav>
     <div class="theme-menu">
       <button class="theme-toggle" id="theme-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list" aria-label="Appearance: Signature">
@@ -1419,6 +1486,169 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
   </section>
   </main>
 
+  <main id="view-library" hidden>
+  <section class="s-hero">
+    <div class="s-motif" aria-hidden="true"><svg viewBox="0 0 900 640" preserveAspectRatio="xMidYMid slice"><use href="#contour"/></svg></div>
+    <div class="wrap">
+      <div class="s-copy">
+        <span class="label">What we read</span>
+        <h1 class="s-title">Reading list</h1>
+        <p class="s-lede">A short list of the best books on investing: value, valuation, risk and the psychology behind it all.  For first steps and advanced work alike.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Start here</h2>
+        <p>New to investing? These three, in this order, give the strongest foundation.</p>
+      </div>
+<div class="lib-shelf">
+<article><span class="no">1</span><h3>The Psychology of Money</h3><div class="by">Morgan Housel</div><p class="why">Behaviour matters more than intelligence.</p><div class="tagrow"><span class="tg lv">Starting out</span><span class="tg">Mindset &amp; history</span></div></article>
+<article><span class="no">2</span><h3>The Intelligent Investor</h3><div class="by">Benjamin Graham</div><p class="why">Margin of safety and Mr Market: the foundation of how we think.</p><div class="tagrow"><span class="tg lv">Core</span><span class="tg">Value investing</span></div></article>
+<article><span class="no">3</span><h3>The Little Book of Valuation</h3><div class="by">Aswath Damodaran</div><p class="why">A short first introduction to valuing any company.</p><div class="tagrow"><span class="tg lv">Starting out</span><span class="tg">Business &amp; valuation</span></div></article>
+</div>
+    </div>
+  </section>
+
+  <section class="band" id="reading-list">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>The full list</h2>
+        <p>Twenty-five titles chosen by our members. Filter by topic or level.</p>
+      </div>
+      <div class="lib-bar">
+        <div class="lib-chips" role="group" aria-label="Filter by topic"><button type="button" class="lib-chip" data-shelf="all" aria-pressed="true">All</button><button type="button" class="lib-chip" data-shelf="v" aria-pressed="false">Value investing</button><button type="button" class="lib-chip" data-shelf="b" aria-pressed="false">Business &amp; valuation</button><button type="button" class="lib-chip" data-shelf="f" aria-pressed="false">Statements &amp; risk</button><button type="button" class="lib-chip" data-shelf="p" aria-pressed="false">Portfolio &amp; markets</button><button type="button" class="lib-chip" data-shelf="m" aria-pressed="false">Mindset &amp; history</button></div>
+        <div class="lib-seg" role="group" aria-label="Filter by level"><button type="button" data-level="all" aria-pressed="true">All<span class="lib-lv"> levels</span></button><button type="button" data-level="start" aria-pressed="false">Starting out</button><button type="button" data-level="core" aria-pressed="false">Core</button><button type="button" data-level="adv" aria-pressed="false">Advanced</button></div>
+      </div>
+      <p class="lib-count" id="lib-count" aria-live="polite">25 titles</p>
+      <div class="lib-books" id="lib-books">
+<article class="lib-book" data-shelf="v" data-level="core"><h3>The Intelligent Investor</h3><div class="by">Benjamin Graham</div><p class="why">Margin of safety and Mr Market: the foundation of how we think.</p><div class="tagrow"><span class="tg lv">Core</span><span class="tg">Value investing</span></div></article>
+<article class="lib-book" data-shelf="v" data-level="core"><h3>Common Stocks and Uncommon Profits</h3><div class="by">Philip Fisher</div><p class="why">Qualitative research on a business, the counterpart to Graham&#x27;s numbers.</p><div class="tagrow"><span class="tg lv">Core</span><span class="tg">Value investing</span></div></article>
+<article class="lib-book" data-shelf="v" data-level="start"><h3>One Up on Wall Street</h3><div class="by">Peter Lynch</div><p class="why">How good ideas can come from everyday life, in plain language.</p><div class="tagrow"><span class="tg lv">Starting out</span><span class="tg">Value investing</span></div></article>
+<article class="lib-book" data-shelf="v" data-level="core"><h3>The Essays of Warren Buffett</h3><div class="by">Warren Buffett, ed. Lawrence Cunningham</div><p class="why">Buffett&#x27;s own letters, arranged by theme: ownership, valuation, governance.</p><div class="tagrow"><span class="tg lv">Core</span><span class="tg">Value investing</span></div></article>
+<article class="lib-book" data-shelf="v" data-level="start"><h3>The Outsiders</h3><div class="by">William Thorndike</div><p class="why">Eight CEOs who allocated capital well, told as readable case studies.</p><div class="tagrow"><span class="tg lv">Starting out</span><span class="tg">Value investing</span></div></article>
+<article class="lib-book" data-shelf="b" data-level="core"><h3>The Most Important Thing</h3><div class="by">Howard Marks</div><p class="why">Risk, cycles and second-level thinking.</p><div class="tagrow"><span class="tg lv">Core</span><span class="tg">Business &amp; valuation</span></div></article>
+<article class="lib-book" data-shelf="b" data-level="core"><h3>7 Powers</h3><div class="by">Hamilton Helmer</div><p class="why">A clear framework for what makes a competitive advantage last.</p><div class="tagrow"><span class="tg lv">Core</span><span class="tg">Business &amp; valuation</span></div></article>
+<article class="lib-book" data-shelf="b" data-level="start"><h3>The Little Book of Valuation</h3><div class="by">Aswath Damodaran</div><p class="why">A short first introduction to valuing any company.</p><div class="tagrow"><span class="tg lv">Starting out</span><span class="tg">Business &amp; valuation</span></div></article>
+<article class="lib-book" data-shelf="b" data-level="adv"><h3>Expectations Investing</h3><div class="by">Alfred Rappaport &amp; Michael Mauboussin</div><p class="why">Works backwards from the price to what the market assumes.</p><div class="tagrow"><span class="tg lv">Advanced</span><span class="tg">Business &amp; valuation</span></div></article>
+<article class="lib-book" data-shelf="b" data-level="adv"><h3>Investment Valuation</h3><div class="by">Aswath Damodaran</div><p class="why">The full reference for every valuation method.</p><div class="tagrow"><span class="tg lv">Advanced</span><span class="tg">Business &amp; valuation</span></div></article>
+<article class="lib-book" data-shelf="f" data-level="start"><h3>Financial Intelligence</h3><div class="by">Karen Berman &amp; Joe Knight</div><p class="why">Reading the numbers without an accounting background.</p><div class="tagrow"><span class="tg lv">Starting out</span><span class="tg">Statements &amp; risk</span></div></article>
+<article class="lib-book" data-shelf="f" data-level="start"><h3>The Interpretation of Financial Statements</h3><div class="by">Benjamin Graham &amp; Spencer Meredith</div><p class="why">A very short guide to the balance sheet and income statement.</p><div class="tagrow"><span class="tg lv">Starting out</span><span class="tg">Statements &amp; risk</span></div></article>
+<article class="lib-book" data-shelf="f" data-level="core"><h3>Financial Shenanigans</h3><div class="by">Howard Schilit</div><p class="why">How to spot accounting red flags before they become losses.</p><div class="tagrow"><span class="tg lv">Core</span><span class="tg">Statements &amp; risk</span></div></article>
+<article class="lib-book" data-shelf="f" data-level="core"><h3>Against the Gods</h3><div class="by">Peter Bernstein</div><p class="why">The history of risk and probability behind modern investing.</p><div class="tagrow"><span class="tg lv">Core</span><span class="tg">Statements &amp; risk</span></div></article>
+<article class="lib-book" data-shelf="f" data-level="adv"><h3>Security Analysis</h3><div class="by">Benjamin Graham &amp; David Dodd</div><p class="why">The original text. Best used as a reference rather than read cover to cover.</p><div class="tagrow"><span class="tg lv">Advanced</span><span class="tg">Statements &amp; risk</span></div></article>
+<article class="lib-book" data-shelf="p" data-level="start"><h3>A Random Walk Down Wall Street</h3><div class="by">Burton Malkiel</div><p class="why">The case for index investing, the benchmark we have to beat.</p><div class="tagrow"><span class="tg lv">Starting out</span><span class="tg">Portfolio &amp; markets</span></div></article>
+<article class="lib-book" data-shelf="p" data-level="start"><h3>The Little Book of Common Sense Investing</h3><div class="by">John Bogle</div><p class="why">Why costs and patience matter more than most people expect.</p><div class="tagrow"><span class="tg lv">Starting out</span><span class="tg">Portfolio &amp; markets</span></div></article>
+<article class="lib-book" data-shelf="p" data-level="core"><h3>Stocks for the Long Run</h3><div class="by">Jeremy Siegel</div><p class="why">Long-term return data across asset classes.</p><div class="tagrow"><span class="tg lv">Core</span><span class="tg">Portfolio &amp; markets</span></div></article>
+<article class="lib-book" data-shelf="p" data-level="adv"><h3>Manias, Panics and Crashes</h3><div class="by">Charles Kindleberger</div><p class="why">The anatomy of bubbles and financial crises.</p><div class="tagrow"><span class="tg lv">Advanced</span><span class="tg">Portfolio &amp; markets</span></div></article>
+<article class="lib-book" data-shelf="p" data-level="core"><h3>Fooled by Randomness</h3><div class="by">Nassim Nicholas Taleb</div><p class="why">Luck versus skill, and why good outcomes can come from bad decisions.</p><div class="tagrow"><span class="tg lv">Core</span><span class="tg">Portfolio &amp; markets</span></div></article>
+<article class="lib-book" data-shelf="m" data-level="start"><h3>The Psychology of Money</h3><div class="by">Morgan Housel</div><p class="why">Behaviour matters more than intelligence.</p><div class="tagrow"><span class="tg lv">Starting out</span><span class="tg">Mindset &amp; history</span></div></article>
+<article class="lib-book" data-shelf="m" data-level="core"><h3>Thinking, Fast and Slow</h3><div class="by">Daniel Kahneman</div><p class="why">The biases that affect every analyst.</p><div class="tagrow"><span class="tg lv">Core</span><span class="tg">Mindset &amp; history</span></div></article>
+<article class="lib-book" data-shelf="m" data-level="core"><h3>Reminiscences of a Stock Operator</h3><div class="by">Edwin Lefèvre</div><p class="why">Market psychology told as a story.</p><div class="tagrow"><span class="tg lv">Core</span><span class="tg">Mindset &amp; history</span></div></article>
+<article class="lib-book" data-shelf="m" data-level="adv"><h3>Poor Charlie&#x27;s Almanack</h3><div class="by">Charlie Munger</div><p class="why">Munger&#x27;s talks and mental models, for combining ideas from many fields.</p><div class="tagrow"><span class="tg lv">Advanced</span><span class="tg">Mindset &amp; history</span></div></article>
+<article class="lib-book" data-shelf="m" data-level="start"><h3>Richer, Wiser, Happier</h3><div class="by">William Green</div><p class="why">Interviews with great investors about how they think.</p><div class="tagrow"><span class="tg lv">Starting out</span><span class="tg">Mindset &amp; history</span></div></article>
+      </div>
+      <p class="lib-empty" id="lib-empty" hidden>No titles on this shelf at this level. Try another level.</p>
+    </div>
+  </section>
+
+  <section class="band navy" id="members-picks">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Members&rsquo; picks</h2>
+        <p>The books that changed how some of us think about money, risk and markets.</p>
+      </div>
+      <!-- PLACEHOLDER TEXT: replace each quote below with a real, anonymous member comment -->
+      <div class="lib-mp">
+        <figure><blockquote>&ldquo;It showed me that risk is something you can think about clearly, not just something to fear.&rdquo;</blockquote><figcaption>Against the Gods</figcaption></figure>
+        <figure><blockquote>&ldquo;The best protection against my own overconfidence. I now ask whether a result was skill or luck before I celebrate it.&rdquo;</blockquote><figcaption>Fooled by Randomness</figcaption></figure>
+        <figure><blockquote>&ldquo;It made me realise that how I behave with money matters more than how much I know.&rdquo;</blockquote><figcaption>The Psychology of Money</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Glossary</h2>
+        <p>Plain definitions of the terms investors use.</p>
+      </div>
+      <div class="lib-az" id="lib-az" role="group" aria-label="Filter the glossary by letter"><button type="button" data-l="all" aria-pressed="true">All</button><button type="button" data-l="A" aria-pressed="false">A</button><button type="button" data-l="B" aria-pressed="false">B</button><button type="button" data-l="C" aria-pressed="false">C</button><button type="button" data-l="D" aria-pressed="false">D</button><button type="button" data-l="E" aria-pressed="false">E</button><button type="button" data-l="F" aria-pressed="false">F</button><button type="button" data-l="G" aria-pressed="false">G</button><button type="button" data-l="H" aria-pressed="false">H</button><button type="button" data-l="I" aria-pressed="false">I</button><button type="button" data-l="J" aria-pressed="false">J</button><button type="button" data-l="K" aria-pressed="false">K</button><button type="button" data-l="L" aria-pressed="false">L</button><button type="button" data-l="M" aria-pressed="false">M</button><button type="button" data-l="N" aria-pressed="false">N</button><button type="button" data-l="O" aria-pressed="false">O</button><button type="button" data-l="P" aria-pressed="false">P</button><button type="button" data-l="Q" aria-pressed="false">Q</button><button type="button" data-l="R" aria-pressed="false">R</button><button type="button" data-l="S" aria-pressed="false">S</button><button type="button" data-l="T" aria-pressed="false">T</button><button type="button" data-l="U" aria-pressed="false">U</button><button type="button" data-l="V" aria-pressed="false">V</button><button type="button" data-l="W" aria-pressed="false">W</button><button type="button" data-l="Y" aria-pressed="false">Y</button><button type="button" data-l="Z" aria-pressed="false">Z</button></div>
+      <dl class="lib-gl" id="lib-gl">
+        <div data-l="A"><dt>Alpha</dt><dd>The return a portfolio earns above its benchmark after allowing for risk. A measure of skill rather than of market movement.</dd></div>
+        <div data-l="A"><dt>Asset allocation</dt><dd>How a portfolio is split between asset types such as shares, bonds and cash. It drives a large part of the portfolio&#x27;s risk and return.</dd></div>
+        <div data-l="B"><dt>Balance sheet</dt><dd>A snapshot of what a company owns and owes at one date: its assets, its liabilities and the owners&#x27; equity.</dd></div>
+        <div data-l="B"><dt>Bear market</dt><dd>A long fall in market prices, commonly defined as a drop of 20% or more from a recent high.</dd></div>
+        <div data-l="B"><dt>Benchmark</dt><dd>An index we measure ourselves against, such as the S&amp;P 500, to show whether our choices added anything.</dd></div>
+        <div data-l="B"><dt>Beta</dt><dd>How much a share tends to move compared with the overall market. A beta above 1 means it moves more than the market.</dd></div>
+        <div data-l="B"><dt>Book value</dt><dd>A company&#x27;s assets minus its liabilities, as shown on its balance sheet. What would be left for shareholders on paper.</dd></div>
+        <div data-l="B"><dt>Bull market</dt><dd>A long period of rising market prices.</dd></div>
+        <div data-l="C"><dt>Capital gain</dt><dd>The profit from selling an investment for more than it cost.</dd></div>
+        <div data-l="C"><dt>Cash flow statement</dt><dd>Shows the cash that came into and left a company over a period, split into operations, investing and financing.</dd></div>
+        <div data-l="C"><dt>Compound interest</dt><dd>Earning returns on past returns as well as on the original amount, so growth builds on itself over time.</dd></div>
+        <div data-l="C"><dt>Correlation</dt><dd>How closely two investments move together. Low correlation between holdings helps spread risk.</dd></div>
+        <div data-l="C"><dt>Current ratio</dt><dd>Current assets divided by current liabilities. Shows whether a company can pay its bills over the next year.</dd></div>
+        <div data-l="D"><dt>Debt-to-equity ratio</dt><dd>Total debt divided by shareholders&#x27; equity. A higher figure means the company relies more on borrowed money.</dd></div>
+        <div data-l="D"><dt>Discounted cash flow</dt><dd>A valuation that adds up the cash a business is expected to produce, reduced to today&#x27;s value because money later is worth less than money now.</dd></div>
+        <div data-l="D"><dt>Diversification</dt><dd>Spreading money across different investments so that one failure does not sink the whole portfolio.</dd></div>
+        <div data-l="D"><dt>Dividend</dt><dd>A share of a company&#x27;s profit paid out to its shareholders, usually in cash.</dd></div>
+        <div data-l="D"><dt>Dividend payout ratio</dt><dd>The part of a company&#x27;s earnings paid out as dividends. A very high ratio can be hard to sustain.</dd></div>
+        <div data-l="D"><dt>Dividend yield</dt><dd>The yearly dividend divided by the share price. The cash return before any change in the price.</dd></div>
+        <div data-l="D"><dt>Dollar-cost averaging</dt><dd>Investing a fixed amount at regular intervals, whatever the price, so that purchases are spread over time.</dd></div>
+        <div data-l="D"><dt>Drawdown</dt><dd>The fall from a portfolio&#x27;s highest value to its lowest before it recovers. A measure of how bad the bad periods were.</dd></div>
+        <div data-l="E"><dt>Earnings per share</dt><dd>A company&#x27;s profit divided by its number of shares. The profit attributable to each share.</dd></div>
+        <div data-l="E"><dt>EBITDA</dt><dd>Earnings before interest, taxes, depreciation and amortisation. A rough measure of operating profit before financing and accounting charges.</dd></div>
+        <div data-l="E"><dt>Enterprise value</dt><dd>What it would cost to buy the whole business: market capitalisation plus debt, minus cash.</dd></div>
+        <div data-l="E"><dt>ETF</dt><dd>Exchange-traded fund. A fund that holds a basket of assets, often an index, and trades on an exchange like a share.</dd></div>
+        <div data-l="E"><dt>Expense ratio</dt><dd>The yearly cost of owning a fund, shown as a percentage of the money invested. Lower costs leave more of the return to the investor.</dd></div>
+        <div data-l="F"><dt>Free cash flow</dt><dd>The cash a company produces after paying to run and maintain the business. What is left for its owners.</dd></div>
+        <div data-l="G"><dt>Growth stock</dt><dd>A share in a company expected to grow sales and profits faster than average, often priced at a premium.</dd></div>
+        <div data-l="H"><dt>Hedge fund</dt><dd>A privately run investment fund that uses flexible strategies, such as short selling and borrowing, in pursuit of returns.</dd></div>
+        <div data-l="H"><dt>Hedging</dt><dd>Taking a position that offsets the risk of another investment, a bit like insurance against a loss.</dd></div>
+        <div data-l="H"><dt>Hurdle rate</dt><dd>The minimum return an investment must offer to be worth making.</dd></div>
+        <div data-l="I"><dt>Income statement</dt><dd>Shows a company&#x27;s revenue, costs and profit over a period.</dd></div>
+        <div data-l="I"><dt>Index fund</dt><dd>A fund that aims to match an index such as the S&amp;P 500 rather than beat it, usually at low cost.</dd></div>
+        <div data-l="I"><dt>Inflation</dt><dd>The general rise in prices over time, which reduces what each euro can buy.</dd></div>
+        <div data-l="J"><dt>Junk bond</dt><dd>A bond from a borrower with a low credit rating. It pays a higher yield because the risk of default is higher.</dd></div>
+        <div data-l="K"><dt>KPI</dt><dd>Key performance indicator. A measure a company uses to track how the business is doing, such as sales growth or customer numbers.</dd></div>
+        <div data-l="L"><dt>Liquidity</dt><dd>How easily an investment can be sold for cash without moving its price much.</dd></div>
+        <div data-l="M"><dt>Margin of safety</dt><dd>Buying at a price well below our estimate of value, so mistakes do not become losses.</dd></div>
+        <div data-l="M"><dt>Market capitalisation</dt><dd>The total value of a company&#x27;s shares: the share price multiplied by the number of shares.</dd></div>
+        <div data-l="M"><dt>Moat</dt><dd>A lasting advantage, such as a brand, a cost edge or high switching costs, that protects a company&#x27;s profits from competitors.</dd></div>
+        <div data-l="N"><dt>Net asset value</dt><dd>The value of a fund&#x27;s assets minus its liabilities, usually shown per unit or share.</dd></div>
+        <div data-l="N"><dt>Net income</dt><dd>A company&#x27;s profit after all costs, interest and taxes.</dd></div>
+        <div data-l="O"><dt>Operating margin</dt><dd>Operating profit as a share of revenue. Shows how much a company keeps from each euro of sales before interest and tax.</dd></div>
+        <div data-l="P"><dt>Price-to-book ratio</dt><dd>The share price divided by book value per share. Compares what the market pays with what the balance sheet shows.</dd></div>
+        <div data-l="P"><dt>Price-to-earnings ratio</dt><dd>The share price divided by earnings per share. How much investors pay for each euro of profit.</dd></div>
+        <div data-l="Q"><dt>Quantitative easing</dt><dd>When a central bank buys bonds to push down interest rates and put more money into the economy.</dd></div>
+        <div data-l="Q"><dt>Quick ratio</dt><dd>Liquid assets, leaving out inventory, divided by current liabilities. A stricter test than the current ratio.</dd></div>
+        <div data-l="R"><dt>Rebalancing</dt><dd>Adjusting a portfolio back to its target mix after price moves have shifted the weights.</dd></div>
+        <div data-l="R"><dt>Return on equity</dt><dd>Net profit divided by shareholders&#x27; equity. How much profit a company makes on its owners&#x27; money.</dd></div>
+        <div data-l="R"><dt>Return on invested capital</dt><dd>The profit a business earns on the money put into it. A high figure over many years usually points to a strong business.</dd></div>
+        <div data-l="S"><dt>Sharpe ratio</dt><dd>A portfolio&#x27;s return above a risk-free rate, divided by its volatility. Shows how much return was earned for each unit of risk.</dd></div>
+        <div data-l="S"><dt>Short selling</dt><dd>Selling a borrowed share in the hope of buying it back cheaper. The loss can be larger than the amount first invested.</dd></div>
+        <div data-l="S"><dt>Stock split</dt><dd>A company divides its shares into more shares at a lower price. The company&#x27;s total value does not change.</dd></div>
+        <div data-l="T"><dt>Total return</dt><dd>The full return on an investment: the price change plus any dividends or interest received.</dd></div>
+        <div data-l="U"><dt>Undervalued</dt><dd>Trading below our estimate of what the company is worth.</dd></div>
+        <div data-l="U"><dt>Unrealised gain</dt><dd>A profit on paper, on an investment that has not been sold yet.</dd></div>
+        <div data-l="V"><dt>Value stock</dt><dd>A share that looks cheap compared with the company&#x27;s earnings, assets or cash flow.</dd></div>
+        <div data-l="V"><dt>Volatility</dt><dd>How much a price moves up and down. Often used as a measure of risk, though it is not the same as losing money.</dd></div>
+        <div data-l="W"><dt>Weighting</dt><dd>The share of a portfolio held in a single investment.</dd></div>
+        <div data-l="W"><dt>Working capital</dt><dd>Current assets minus current liabilities. The money a company has available to run day to day.</dd></div>
+        <div data-l="Y"><dt>Yield</dt><dd>The income an investment pays, as a percentage of its price. It covers interest or dividends.</dd></div>
+        <div data-l="Y"><dt>Yield curve</dt><dd>A line showing interest rates for bonds of different lengths. When short-term rates are higher than long-term ones, it is called inverted.</dd></div>
+        <div data-l="Z"><dt>Zero-coupon bond</dt><dd>A bond that pays no interest along the way. It is sold at a discount and pays its full face value at the end.</dd></div>
+      </dl>
+      <div class="lib-pager">
+        <p id="lib-gl-count" aria-live="polite"></p>
+        <div class="lib-pgbtns"><button type="button" id="lib-prev">Previous</button><button type="button" id="lib-next">Next</button></div>
+      </div>
+    </div>
+  </section>
+  </main>
+
   <main id="view-events" hidden>
   <section id="pitch" class="band navy">
     <div class="wrap">
@@ -1492,6 +1722,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
   var homeView = document.getElementById('view-home');
   var eventsView = document.getElementById('view-events');
   var strategyView = document.getElementById('view-strategy');
+  var libraryView = document.getElementById('view-library');
   var view = 'home';
   var compact = false, current = -2, ticking = false;
 
@@ -1517,6 +1748,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     var idx = 0;
     if (view === 'strategy') idx = 1;
     else if (view === 'events') idx = 2;
+    else if (view === 'library') idx = 3;
 
     if (idx !== current) {
       current = idx;
@@ -1534,8 +1766,9 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     homeView.hidden = name !== 'home';
     eventsView.hidden = name !== 'events';
     strategyView.hidden = name !== 'strategy';
+    libraryView.hidden = name !== 'library';
     document.documentElement.setAttribute('data-view', name);
-    var shown = name === 'home' ? homeView : (name === 'strategy' ? strategyView : eventsView);
+    var shown = name === 'home' ? homeView : (name === 'strategy' ? strategyView : (name === 'library' ? libraryView : eventsView));
     shown.classList.remove('view-in');
     void shown.offsetWidth;
     shown.classList.add('view-in');
@@ -1564,12 +1797,13 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
       window.scrollTo({ top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth' });
     });
   });
-  [].slice.call(document.querySelectorAll('a[href="#events"], a[href="#strategy"]')).forEach(function (a) {
+  [].slice.call(document.querySelectorAll('a[href="#events"], a[href="#strategy"], a[href="#library"]')).forEach(function (a) {
     a.addEventListener('click', function (e) {
       e.preventDefault();
       var target = a.getAttribute('href');
       if (target === '#events') { go('events', '#events'); toTop(); }
       else if (target === '#strategy') { go('strategy', '#strategy'); toTop(); }
+      else if (target === '#library') { go('library', '#library'); toTop(); }
       update();
     });
   });
@@ -1585,6 +1819,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     var h = location.hash;
     if (h === '#events') { showView('events'); toTop(); }
     else if (h === '#strategy') { showView('strategy'); toTop(); }
+    else if (h === '#library') { showView('library'); toTop(); }
     else {
       var was = view;
       showView('home');
@@ -1596,9 +1831,9 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
   }
   window.addEventListener('popstate', sync);
   window.addEventListener('hashchange', sync);
-  if (location.hash === '#events' || location.hash === '#strategy') {
+  if (location.hash === '#events' || location.hash === '#strategy' || location.hash === '#library') {
     view = 'home';
-    showView(location.hash === '#events' ? 'events' : 'strategy');
+    showView(location.hash.slice(1));
     setTimeout(toTop, 0);
     window.addEventListener('load', function () { setTimeout(toTop, 0); });
   }
@@ -1607,6 +1842,63 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
   window.addEventListener('resize', onScroll);
   window.addEventListener('load', update);
   update();
+
+  // library: filter the reading list by topic and level
+  (function () {
+    var wrap = document.getElementById('lib-books');
+    if (!wrap) return;
+    var books = [].slice.call(wrap.querySelectorAll('.lib-book'));
+    var chips = [].slice.call(document.querySelectorAll('.lib-chip'));
+    var segs = [].slice.call(document.querySelectorAll('.lib-seg button'));
+    var count = document.getElementById('lib-count');
+    var empty = document.getElementById('lib-empty');
+    var shelf = 'all', level = 'all';
+    function apply() {
+      var n = 0;
+      books.forEach(function (b) {
+        var ok = (shelf === 'all' || b.getAttribute('data-shelf') === shelf) && (level === 'all' || b.getAttribute('data-level') === level);
+        b.hidden = !ok;
+        if (ok) n++;
+      });
+      count.textContent = n === books.length ? books.length + ' titles' : n + ' of ' + books.length + ' titles';
+      empty.hidden = n !== 0;
+    }
+    function pick(list, attr, val) {
+      list.forEach(function (o) { o.setAttribute('aria-pressed', o.getAttribute(attr) === val ? 'true' : 'false'); });
+    }
+    chips.forEach(function (c) { c.addEventListener('click', function () { shelf = c.getAttribute('data-shelf'); pick(chips, 'data-shelf', shelf); apply(); }); });
+    segs.forEach(function (c) { c.addEventListener('click', function () { level = c.getAttribute('data-level'); pick(segs, 'data-level', level); apply(); }); });
+  })();
+
+  // library: glossary, six terms at a time with a letter filter
+  (function () {
+    var dl = document.getElementById('lib-gl');
+    if (!dl) return;
+    var items = [].slice.call(dl.children);
+    var btns = [].slice.call(document.querySelectorAll('#lib-az button'));
+    var prev = document.getElementById('lib-prev'), next = document.getElementById('lib-next');
+    var count = document.getElementById('lib-gl-count');
+    var SIZE = 6, letter = 'all', page = 0;
+    function render() {
+      var list = items.filter(function (d) { return letter === 'all' || d.getAttribute('data-l') === letter; });
+      var pages = Math.max(1, Math.ceil(list.length / SIZE));
+      if (page > pages - 1) page = pages - 1;
+      var from = page * SIZE, to = Math.min(list.length, from + SIZE);
+      items.forEach(function (d) { d.hidden = true; });
+      list.slice(from, to).forEach(function (d) { d.hidden = false; });
+      count.textContent = list.length + (list.length === 1 ? ' term' : ' terms') + (pages > 1 ? ' \u00b7 page ' + (page + 1) + ' of ' + pages : '');
+      prev.disabled = page === 0; next.disabled = page >= pages - 1;
+      prev.parentNode.hidden = pages === 1;
+    }
+    btns.forEach(function (b) { b.addEventListener('click', function () {
+      letter = b.getAttribute('data-l'); page = 0;
+      btns.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+      render();
+    }); });
+    prev.addEventListener('click', function () { if (page > 0) { page--; render(); } });
+    next.addEventListener('click', function () { page++; render(); });
+    render();
+  })();
 
   // performance bars grow once the chart is in view
   var perf = document.querySelector('.perf');
