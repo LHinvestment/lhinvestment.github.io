@@ -150,7 +150,7 @@ p { margin: 0; }
 a { color: var(--accent); }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-.label, .figure span, .person .role, .steps .mins, .tag {
+.label, .figure span, .person .role, .steps .mins {
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 600;
@@ -198,12 +198,10 @@ nav a:hover::after, nav a.active::after { transform: scaleX(1); }
 /* hero band */
 .hero-band { background: var(--band); color: var(--band-fg); position: relative; overflow: hidden; }
 .hero-band > .wrap { position: relative; z-index: 1; }
-.h-motif { position: absolute; top: 0; right: 0; bottom: 0; width: min(72%, 980px); z-index: 0; --ct: var(--band-gold); pointer-events: none;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 60%); mask-image: linear-gradient(to right, transparent 0%, #000 60%); }
-.h-motif svg { display: block; width: 100%; height: 100%; }
-.h-motif .cm { opacity: 0.13; } .h-motif .cj { opacity: 0.24; }
-:root[data-mode="light"] .h-motif .cm { opacity: 0.30; } :root[data-mode="light"] .h-motif .cj { opacity: 0.52; }
-@media (max-width: 760px) { .h-motif { width: 100%; opacity: 0.7; -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 90%); mask-image: linear-gradient(to bottom, #000 0%, transparent 90%); } }
+.h-motif { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.95; background: url(hero-rings.webp) right center / auto 100% no-repeat; }
+:root[data-mode="light"] .h-motif { opacity: 0.5; }
+@media (max-width: 1100px) { .h-motif { -webkit-mask-image: linear-gradient(to right, transparent 25%, #000 85%); mask-image: linear-gradient(to right, transparent 25%, #000 85%); } }
+@media (max-width: 760px) { .h-motif { opacity: 0.4; background-position: right top; background-size: auto 60%; -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, transparent 100%); } }
 @media print { .h-motif { display: none; } }
 .hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 40px; padding-block: 64px 56px; align-items: start; }
 .hero-copy { container-type: inline-size; }
@@ -274,13 +272,20 @@ section.alt .perf { background: var(--bg); }
 .card .label { display: block; margin-bottom: 10px; color: var(--gold-text); }
 
 /* events */
+#events { position: relative; overflow: hidden; }
+#events > .wrap { position: relative; z-index: 1; }
+.ev-clock { display: none; }
+@media (min-width: 1180px) {
+  .ev-clock { display: block; position: absolute; top: 50%; right: 0; transform: translateY(-50%); height: 100%; max-height: 760px; width: 480px; z-index: 0; pointer-events: none; opacity: 0.5; background: url(events-clock.webp) right center / auto 100% no-repeat; }
+  #events .sec-head p { max-width: 640px; }
+}
+@media print { .ev-clock { display: none; } }
 .events { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--gold-line); }
-.events li { display: grid; grid-template-columns: 96px minmax(0, 1fr) auto; gap: 8px 24px; padding-block: 18px; border-bottom: 1px solid var(--gold-line); align-items: baseline; }
+.events li { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 8px 24px; padding-block: 18px; border-bottom: 1px solid var(--gold-line); align-items: baseline; }
 .events .date { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 14px; }
 .events .date b { display: block; font-size: 22px; font-weight: 500; font-family: var(--font-display); color: var(--fg); }
 .events h3 { font-size: 18px; margin-bottom: 2px; }
 .events p { color: var(--muted); font-size: 14px; }
-.tag { padding: 3px 8px; border: 1px solid var(--gold-line); border-radius: 3px; color: var(--muted); white-space: nowrap; }
 
 /* pitch steps (navy band) */
 .steps { overflow: hidden; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
@@ -388,7 +393,6 @@ footer p:first-child { color: var(--band-fg); }
   .avatar { width: min(100%, 112px); }
   .sec-head { grid-template-columns: minmax(0, 1fr); }
   .events li { grid-template-columns: 72px minmax(0, 1fr); }
-  .events .tag { grid-column: 2; justify-self: start; }
   .steps li { border-right: 0; border-bottom: 1px solid var(--rule); }
   section.navy .steps li { border-bottom-color: var(--band-rule); }
   .steps li:last-child { border-bottom: 0; }
@@ -947,7 +951,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
 
   <main id="view-home">
   <div class="hero-band">
-    <div class="h-motif" aria-hidden="true"><svg viewBox="0 0 900 640" preserveAspectRatio="xMidYMid slice"><use href="#contour"/></svg></div>
+    <div class="h-motif" aria-hidden="true"></div>
     <div class="wrap">
       <div class="hero">
         <div class="hero-copy">
@@ -1387,6 +1391,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
   </section>
 
   <section id="events" class="band">
+    <div class="ev-clock" aria-hidden="true"></div>
     <div class="wrap">
     <div class="sec-head">
       <h2>Upcoming events</h2>
@@ -1396,23 +1401,19 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
       <li>
         <div class="date">Sat 16:00<b>17 Oct 2026</b></div>
         <div><h3>Pitch night</h3><p>Members pitch stocks. The room votes on whether it joins the portfolio.</p></div>
-        <span class="tag">Pitch night</span>
       </li>
       <li>
         <div class="date">Sun 18:00<b>8 Nov 2026</b></div>
         <div><h3>Portfolio review</h3><p>Performance against the benchmark, what worked and what we would change.</p></div>
-        <span class="tag">Review</span>
       </li>
       
       <li>
         <div class="date">Sun 18:00<b>06 Dec 2026</b></div>
         <div><h3>LH+ End of the Year Party</h3><p>Get together with current and past LH members</p></div>
-        <span class="tag">Party</span>
       </li>
       <li>
         <div class="date">Sun 16:00<b>10 Jan 2027</b></div>
         <div><h3>Pitch night</h3><p>Pitch a stock. The room votes on whether it joins the portfolio.</p></div>
-        <span class="tag">Pitch night</span>
       </li>
     </ol>
   </div>
@@ -1929,7 +1930,6 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
         var h = document.createElement('h3'); h.textContent = e.title; body.appendChild(h);
         if (e.text) { var pp = document.createElement('p'); pp.textContent = e.text; body.appendChild(pp); }
         li.appendChild(date); li.appendChild(body);
-        if (e.tag) { var t = document.createElement('span'); t.className = 'tag'; t.textContent = e.tag; li.appendChild(t); }
         items.push(li);
       }
       ol.innerHTML = '';
