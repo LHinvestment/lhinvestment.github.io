@@ -199,22 +199,26 @@ nav a:hover::after, nav a.active::after { transform: scaleX(1); }
 .hero-band { background: var(--band); color: var(--band-fg); position: relative; overflow: hidden; }
 .hero-band > .wrap { position: relative; z-index: 1; }
 .h-motif { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(90deg, var(--band) 0%, transparent 58%), url(hero-photo.webp) right center / cover no-repeat, var(--band); }
-:root[data-mode="light"] .h-motif { background: url(hero-photo.webp) right center / cover no-repeat; opacity: 0.55; -webkit-mask-image: linear-gradient(to right, transparent 45%, #000 92%); mask-image: linear-gradient(to right, transparent 45%, #000 92%); }
+:root[data-mode="light"] .h-motif { background: url(hero-photo-light.webp) right center / cover no-repeat, var(--band); opacity: 1; -webkit-mask-image: linear-gradient(to right, transparent 30%, #000 70%); mask-image: linear-gradient(to right, transparent 30%, #000 70%); }
 @media (max-width: 1100px) { .h-motif { background: linear-gradient(90deg, var(--band) 30%, transparent 96%), url(hero-photo.webp) right center / cover no-repeat, var(--band); } }
 @media (max-width: 760px) { .h-motif { background: linear-gradient(90deg, var(--band) 25%, color-mix(in srgb, var(--band) 62%, transparent) 100%), url(hero-photo.webp) right top / auto 560px no-repeat, var(--band); -webkit-mask-image: none; mask-image: none; }
-  :root[data-mode="light"] .h-motif { background: url(hero-photo.webp) right top / auto 480px no-repeat; opacity: 0.28; -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 75%); mask-image: linear-gradient(to bottom, #000 0%, transparent 75%); } }
+  :root[data-mode="light"] .h-motif { background: url(hero-photo-light.webp) right top / auto 480px no-repeat; opacity: 0.6; -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 75%); mask-image: linear-gradient(to bottom, #000 0%, transparent 75%); } }
 @media print { .h-motif { display: none; } }
 /* liquid-glass portfolio card */
-.hero .panel { border-radius: 18px; -webkit-backdrop-filter: blur(22px) saturate(170%); backdrop-filter: blur(22px) saturate(170%); }
-:root:not([data-mode="light"]) .hero .panel { background: linear-gradient(140deg, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.06) 55%, rgba(255, 255, 255, 0.12)); border: 1px solid rgba(255, 255, 255, 0.30); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.50), inset 0 -1px 0 rgba(255, 255, 255, 0.10), inset 1px 0 0 rgba(255, 255, 255, 0.12), 0 24px 60px rgba(0, 8, 20, 0.45); color: #EEF2F8; }
+.hero .panel { border-radius: 18px; }
+:root:not([data-mode="light"]) .hero .panel { background: linear-gradient(140deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.012) 55%, rgba(255, 255, 255, 0.03)), rgba(2, 14, 32, 0.10); -webkit-backdrop-filter: blur(4px) saturate(135%); backdrop-filter: blur(4px) saturate(135%); border: 1px solid rgba(255, 255, 255, 0.40); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65), inset 0 -1px 0 rgba(255, 255, 255, 0.14), 0 24px 60px rgba(0, 8, 20, 0.30); color: #EEF2F8; }
+:root:not([data-mode="light"]) .hero .panel h2, :root:not([data-mode="light"]) .hero .alloc li, :root:not([data-mode="light"]) .hero .panel-foot, :root:not([data-mode="light"]) .hero .panel .label { text-shadow: 0 1px 6px rgba(0, 10, 26, 0.65); }
 :root:not([data-mode="light"]) .hero .panel h2 { color: #fff; }
 :root:not([data-mode="light"]) .hero .panel .label { color: #E4CC96; }
 :root:not([data-mode="light"]) .hero .track { background: rgba(255, 255, 255, 0.14); }
 :root:not([data-mode="light"]) .hero .fill { background: linear-gradient(90deg, #B89B5E, #E8D7A6); }
 :root:not([data-mode="light"]) .hero .fill.alt { background: linear-gradient(90deg, #8FA3BF, #C9D6E8); }
 :root:not([data-mode="light"]) .hero .panel-foot { color: rgba(238, 242, 248, 0.80); border-top-color: rgba(255, 255, 255, 0.22); }
-:root[data-mode="light"] .hero .panel { background: rgba(255, 255, 255, 0.72); border: 1px solid rgba(255, 255, 255, 0.85); box-shadow: inset 0 1px 0 #fff, 0 18px 46px rgba(15, 34, 56, 0.14); }
-@media (max-width: 760px) { :root:not([data-mode="light"]) .hero .panel { background: linear-gradient(140deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.08)); } }
+:root[data-mode="light"] .hero .panel { background: linear-gradient(140deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.22) 55%, rgba(255, 255, 255, 0.38)); -webkit-backdrop-filter: blur(20px) saturate(150%); backdrop-filter: blur(20px) saturate(150%); border: 1px solid rgba(255, 255, 255, 0.85); box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(255, 255, 255, 0.5), 0 22px 50px rgba(60, 44, 20, 0.16); }
+@media (max-width: 760px) {
+  :root:not([data-mode="light"]) .hero .panel { background: linear-gradient(140deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05)), rgba(2, 14, 32, 0.22); -webkit-backdrop-filter: blur(10px) saturate(140%); backdrop-filter: blur(10px) saturate(140%); }
+  :root[data-mode="light"] .hero .panel { background: rgba(255, 255, 255, 0.78); }
+}
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { :root:not([data-mode="light"]) .hero .panel { background: rgba(20, 38, 62, 0.88); } :root[data-mode="light"] .hero .panel { background: rgba(255, 255, 255, 0.94); } }
 .hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 40px; padding-block: 64px 56px; align-items: start; }
 .hero-copy { container-type: inline-size; }
