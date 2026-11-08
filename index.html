@@ -199,10 +199,10 @@ nav a:hover::after, nav a.active::after { transform: scaleX(1); }
 .hero-band { background: var(--band); color: var(--band-fg); position: relative; overflow: hidden; }
 .hero-band > .wrap { position: relative; z-index: 1; }
 .h-motif { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(90deg, var(--band) 0%, transparent 58%), url(hero-photo.webp) right center / cover no-repeat, var(--band); }
-:root[data-mode="light"] .h-motif { background: url(hero-photo-light.webp) right center / cover no-repeat, var(--band); opacity: 1; -webkit-mask-image: linear-gradient(to right, transparent 30%, #000 70%); mask-image: linear-gradient(to right, transparent 30%, #000 70%); }
+:root[data-mode="light"] .h-motif { background: url(hero-photo-light.webp) right center / cover no-repeat, var(--band); opacity: 1; -webkit-mask-image: none; mask-image: none; }
 @media (max-width: 1100px) { .h-motif { background: linear-gradient(90deg, var(--band) 30%, transparent 96%), url(hero-photo.webp) right center / cover no-repeat, var(--band); } }
 @media (max-width: 760px) { .h-motif { background: linear-gradient(90deg, var(--band) 25%, color-mix(in srgb, var(--band) 62%, transparent) 100%), url(hero-photo.webp) right top / auto 560px no-repeat, var(--band); -webkit-mask-image: none; mask-image: none; }
-  :root[data-mode="light"] .h-motif { background: url(hero-photo-light.webp) right top / auto 480px no-repeat; opacity: 0.6; -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 75%); mask-image: linear-gradient(to bottom, #000 0%, transparent 75%); } }
+  :root[data-mode="light"] .h-motif { background: url(hero-photo-light.webp) right top / auto 520px no-repeat, var(--band); opacity: 0.8; -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 75%); mask-image: linear-gradient(to bottom, #000 0%, transparent 75%); } }
 @media print { .h-motif { display: none; } }
 /* liquid-glass portfolio card */
 .hero .panel { border-radius: 18px; }
