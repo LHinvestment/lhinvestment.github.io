@@ -288,9 +288,10 @@ section.alt .perf { background: var(--bg); }
 /* events */
 #events { position: relative; overflow: hidden; }
 #events > .wrap { position: relative; z-index: 1; }
-.ev-clock { display: none; }
+.ev-clock { display: block; position: absolute; top: 18px; right: 0; height: 380px; width: 240px; z-index: 0; pointer-events: none; opacity: 0.4; background: url(events-clock.webp) right center / auto 100% no-repeat; -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent); mask-image: linear-gradient(to bottom, #000 55%, transparent); }
+@media (min-width: 761px) { .ev-clock { top: 24px; height: 470px; width: 296px; opacity: 0.45; } }
 @media (min-width: 1180px) {
-  .ev-clock { display: block; position: absolute; top: 50%; right: 0; transform: translateY(-50%); height: 100%; max-height: 760px; width: 480px; z-index: 0; pointer-events: none; opacity: 0.5; background: url(events-clock.webp) right center / auto 100% no-repeat; }
+  .ev-clock { top: 50%; transform: translateY(-50%); height: 100%; max-height: 760px; width: 480px; opacity: 0.5; -webkit-mask-image: none; mask-image: none; }
   #events .sec-head p { max-width: 640px; }
 }
 @media print { .ev-clock { display: none; } }
