@@ -536,6 +536,38 @@ footer p:first-child { color: var(--band-fg); }
 
 @media (max-width: 350px) { header.top.scrolled nav { gap: 0 8px; } header.top.scrolled nav a { font-size: 12.5px; } }
 
+
+/* market holidays (Events page) */
+#view-events #holidays .sec-head { grid-template-columns: auto minmax(0, 1fr); gap: 16px 48px; align-items: baseline; }
+#holidays .sec-head h2 { white-space: nowrap; }
+.mh { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 40px; align-items: start; }
+.mh-l { display: grid; gap: 16px; }
+.mh-ft { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.mh-f { display: grid; gap: 6px; }
+.mh-f small, .mh-i dt { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--band-muted); }
+#holidays .lib-sel, #holidays .lib-sel select { width: 100%; }
+#holidays .lib-sel select { color: var(--band-gold); background: var(--band-card); border-color: var(--band-rule); font-family: var(--font-display); font-size: 16px; font-weight: 600; padding-top: 8px; padding-bottom: 8px; }
+#holidays .lib-sel select option { color: #0F2238; background: #fff; }
+#holidays .lib-sel::after { border-color: var(--band-fg); }
+.mh-i { margin: 6px 0 0; display: grid; gap: 14px; }
+.mh-i dt { margin-bottom: 4px; }
+.mh-i dd { margin: 0; color: var(--band-fg); font-size: 14.5px; line-height: 1.4; }
+.mh-tag { display: inline-block; font-size: 12px; letter-spacing: .04em; color: var(--band-gold); border: 1px solid var(--band-rule); border-radius: 999px; padding: 3px 11px; }
+.mh-r { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--band-rule); }
+.mh-r li { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--band-rule); }
+.mh-r b { font-weight: 600; color: var(--band-fg); }
+.mh-r b i { font-style: normal; font-weight: 400; color: var(--band-muted); }
+.mh-r span, .mh-note { color: var(--band-muted); }
+.mh-r .mh-none { display: block; padding: 18px 0; }
+.mh-note { margin: 18px 0 0; font-size: 12.5px; }
+@media (max-width: 760px) {
+  #view-events #holidays .sec-head { grid-template-columns: 1fr; }
+  .mh { grid-template-columns: 1fr; gap: 22px; }
+  .mh-i { grid-template-columns: 1fr 1fr; }
+  .mh-i .mh-ix { grid-column: 1 / -1; }
+}
+@media (max-width: 400px) { #holidays .sec-head h2 { white-space: normal; } }
+
 /* library page */
 #view-library button { font-family: inherit; cursor: pointer; }
 .lib-shelf { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
@@ -1737,21 +1769,6 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
   </main>
 
   <main id="view-events" hidden>
-  <section id="pitch" class="band navy">
-    <div class="wrap">
-    <div class="sec-head">
-      <h2>How a pitch night works</h2>
-      <p>Each pitch is a thorough presentation built on fundamental analysis and financial data, supported by technical analysis.</p>
-    </div>
-    <ol class="steps">
-      <li><span class="mins">Step 1</span><h3>The thesis</h3><p>The business, its financial data and why the market has it wrong.</p></li>
-      <li><span class="mins">Step 2</span><h3>Valuation</h3><p>Multiples, forecasts and the price we would pay, with technical analysis for entry.</p></li>
-      <li><span class="mins">Step 3</span><h3>Risks</h3><p>Market sentiment, headwinds and what would invalidate the thesis.</p></li>
-      <li><span class="mins">Step 4</span><h3>Questions and vote</h3><p>The group challenges the pitch, then votes to buy, hold off or pass.</p></li>
-    </ol>
-  </div>
-  </section>
-
   <section id="events" class="band">
     <div class="ev-clock" aria-hidden="true"></div>
     <div class="wrap">
@@ -1779,6 +1796,47 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
       </li>
     </ol>
   </div>
+  </section>
+
+  <section id="pitch" class="band alt">
+    <div class="wrap">
+    <div class="sec-head">
+      <h2>How a pitch night works</h2>
+      <p>Each pitch is a thorough presentation built on fundamental analysis and financial data, supported by technical analysis.</p>
+    </div>
+    <ol class="steps">
+      <li><span class="mins">Step 1</span><h3>The thesis</h3><p>The business, its financial data and why the market has it wrong.</p></li>
+      <li><span class="mins">Step 2</span><h3>Valuation</h3><p>Multiples, forecasts and the price we would pay, with technical analysis for entry.</p></li>
+      <li><span class="mins">Step 3</span><h3>Risks</h3><p>Market sentiment, headwinds and what would invalidate the thesis.</p></li>
+      <li><span class="mins">Step 4</span><h3>Questions and vote</h3><p>The group challenges the pitch, then votes to buy, hold off or pass.</p></li>
+    </ol>
+  </div>
+  </section>
+
+
+  <section id="holidays" class="band navy">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Check market holidays</h2>
+        <p>Times are local to the exchange.</p>
+      </div>
+      <div class="mh">
+        <div class="mh-l">
+          <label class="mh-f"><small>Country</small><span class="lib-sel"><select id="mh-country"><option value="XNYS">United States</option></select></span></label>
+          <div class="mh-ft">
+            <label class="mh-f"><small>From</small><span class="lib-sel"><select id="mh-from"></select></span></label>
+            <label class="mh-f"><small>To</small><span class="lib-sel"><select id="mh-to"></select></span></label>
+          </div>
+          <dl class="mh-i">
+            <div class="mh-ix"><dt>Exchange</dt><dd id="mh-ex"></dd></div>
+            <div><dt>Main indices</dt><dd id="mh-ind"></dd></div>
+            <div><dt>Market type</dt><dd><span class="mh-tag" id="mh-kind"></span></dd></div>
+          </dl>
+        </div>
+        <ul class="mh-r" id="mh-list" aria-live="polite"></ul>
+      </div>
+      <p class="mh-note" id="mh-note">Dates follow each exchange’s official calendar and are updated every night. Regular trading hours.</p>
+    </div>
   </section>
   </main>
 
@@ -2045,6 +2103,96 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     window.addEventListener('resize', function () { if (window.innerWidth === lastWG) return; lastWG = window.innerWidth; clearTimeout(rzG); rzG = setTimeout(function () { render(true); }, 150); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { render(true); });
     render(true);
+  })();
+
+
+  // market holidays: pick a country and a stretch of months; holidays.json is rebuilt every night
+  (function () {
+    var sc = document.getElementById('mh-country'), sf = document.getElementById('mh-from'), st = document.getElementById('mh-to'), list = document.getElementById('mh-list');
+    if (!sc || !sf || !st || !list) return;
+    // [country, MIC, exchange, main indices, d = developed, e = emerging, m = mixed]
+    var MK = [["Australia","XASX","Australian Securities Exchange (ASX)","S&P/ASX 200","d"],["Austria","XWBO","Wiener Börse (Vienna Stock Exchange)","ATX","d"],["Belgium","XBRU","Euronext Brussels","BEL 20","d"],["Brazil","BVMF","B3 (Brasil, Bolsa, Balcão)","Ibovespa","e"],["Canada","XTSE","Toronto Stock Exchange (TSX)","S&P/TSX Composite","d"],["Chile","XSGO","Bolsa de Santiago","IPSA","e"],["China","XSHG","Shanghai Stock Exchange · Shenzhen Stock Exchange","SSE Composite · SZSE Component","e"],["Colombia","XBOG","Bolsa de Valores de Colombia (BVC)","MSCI COLCAP","e"],["Czechia","XPRA","Prague Stock Exchange","PX","e"],["Denmark","XCSE","Nasdaq Copenhagen","OMXC25","d"],["Finland","XHEL","Nasdaq Helsinki","OMXH25","d"],["France","XPAR","Euronext Paris","CAC 40","d"],["Germany","XETR","Frankfurt Stock Exchange (Xetra)","DAX","d"],["Greece","ASEX","Athens Stock Exchange (ATHEX)","Athens General Composite","d"],["Hong Kong","XHKG","Hong Kong Stock Exchange (HKEX)","Hang Seng Index","d"],["Hungary","XBUD","Budapest Stock Exchange","BUX","e"],["India","XBOM","BSE (Bombay Stock Exchange) · NSE (National Stock Exchange)","Nifty 50 · Sensex","e"],["Indonesia","XIDX","Indonesia Stock Exchange (IDX)","IDX Composite","e"],["Ireland","XDUB","Euronext Dublin","ISEQ 20","d"],["Italy","XMIL","Euronext Milan","FTSE MIB","d"],["Japan","XTKS","Tokyo Stock Exchange (JPX)","Nikkei 225 · TOPIX","d"],["Luxembourg","XLUX","Luxembourg Stock Exchange","LuxX","d"],["Malaysia","XKLS","Bursa Malaysia","FBM KLCI","e"],["Mexico","XMEX","Bolsa Mexicana de Valores (BMV)","S&P/BMV IPC","e"],["Netherlands","XAMS","Euronext Amsterdam","AEX","d"],["New Zealand","XNZE","New Zealand Exchange (NZX)","S&P/NZX 50","d"],["Norway","XOSL","Euronext Oslo Børs","OBX","d"],["Peru","XLIM","Bolsa de Valores de Lima (BVL)","S&P/BVL Peru General","e"],["Philippines","XPHS","Philippine Stock Exchange (PSE)","PSEi","e"],["Poland","XWAR","Warsaw Stock Exchange (GPW)","WIG20","e"],["Portugal","XLIS","Euronext Lisbon","PSI","d"],["Saudi Arabia","XSAU","Saudi Exchange (Tadawul)","TASI","e"],["Singapore","XSES","Singapore Exchange (SGX)","Straits Times Index","d"],["South Africa","XJSE","Johannesburg Stock Exchange (JSE)","FTSE/JSE All Share","e"],["South Korea","XKRX","Korea Exchange (KRX)","KOSPI · KOSDAQ","m"],["Spain","XMAD","Bolsa de Madrid (BME)","IBEX 35","d"],["Sweden","XSTO","Nasdaq Stockholm","OMXS30","d"],["Switzerland","XSWX","SIX Swiss Exchange","SMI","d"],["Taiwan","XTAI","Taiwan Stock Exchange (TWSE)","TAIEX","e"],["Thailand","XBKK","Stock Exchange of Thailand (SET)","SET Index","e"],["Turkey","XIST","Borsa Istanbul","BIST 100","e"],["United Kingdom","XLON","London Stock Exchange","FTSE 100","d"],["United States","XNYS","New York Stock Exchange · Nasdaq","S&P 500 · Nasdaq-100","d"]];
+    var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], DAY = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    var KIND = { d: 'Developed market', e: 'Emerging market', m: 'Developed \u00b7 Emerging' };
+    var DRE = /^\d{4}-\d{2}-\d{2}$/, HOL = null, failed = false, now = new Date(), cur = now.getFullYear() * 12 + now.getMonth(), lastAll = 0;
+    var DEF = 'XNYS';
+    function p2(n) { return (n < 10 ? '0' : '') + n; }
+    function mi(d) { return +d.slice(0, 4) * 12 + (+d.slice(5, 7) - 1); }
+    function ml(n) { return MON[n % 12] + ' ' + Math.floor(n / 12); }
+    function row(m) { for (var i = 0; i < MK.length; i++) if (MK[i][1] === m) return MK[i]; return MK[0]; }
+    function span(m) {
+      var r = HOL && HOL.r[m];
+      return r ? [Math.max(cur, mi(r[0])), mi(r[1])] : [cur, cur + 5];
+    }
+    function fill(sel, a, b, v) {
+      sel.innerHTML = '';
+      for (var n = a; n <= b; n++) { var o = document.createElement('option'); o.value = n; o.textContent = ml(n); sel.appendChild(o); }
+      sel.value = Math.min(Math.max(v, a), b);
+    }
+    function guard() {
+      var f = +sf.value, t = +st.value;
+      [].forEach.call(sf.options, function (o) { o.disabled = +o.value > t; });
+      [].forEach.call(st.options, function (o) { o.disabled = +o.value < f; });
+    }
+    function showList() {
+      var m = sc.value, r = HOL && HOL.r[m], f = +sf.value, t = +st.value, items = [];
+      list.innerHTML = '';
+      function add(txt, cls) { var li = document.createElement('li'); if (cls) { var sp = document.createElement('span'); sp.className = cls; sp.textContent = txt; li.appendChild(sp); } list.appendChild(li); return li; }
+      if (!r) { if (failed) add('Holiday dates are not available right now.', 'mh-none'); return; }
+      var h = HOL.h[m] || {}, e = HOL.e[m] || {};
+      Object.keys(h).forEach(function (d) { items.push([d, 'Closed']); });
+      Object.keys(e).forEach(function (d) { if (!h[d]) items.push([d, 'Closes early at ' + p2(Math.floor(e[d] / 60)) + ':' + p2(e[d] % 60)]); });
+      items = items.filter(function (x) { var n = mi(x[0]); return n >= f && n <= t && x[0] >= now.getFullYear() + '-' + p2(now.getMonth() + 1) + '-' + p2(now.getDate()); }).sort(function (a, b) { return a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0; });
+      if (!items.length) { add('No closures or early closes in this period.', 'mh-none'); return; }
+      items.forEach(function (x) {
+        var y = +x[0].slice(0, 4), d = new Date(y, +x[0].slice(5, 7) - 1, +x[0].slice(8, 10)), li = document.createElement('li'), b = document.createElement('b'), sp = document.createElement('span');
+        b.textContent = DAY[d.getDay()] + ' ' + d.getDate() + ' ' + MON[d.getMonth()];
+        if (y !== now.getFullYear()) { var yi = document.createElement('i'); yi.textContent = ' ' + y; b.appendChild(yi); }
+        sp.textContent = x[1]; li.appendChild(b); li.appendChild(sp); list.appendChild(li);
+      });
+    }
+    function info() {
+      var k = row(sc.value);
+      document.getElementById('mh-ex').textContent = k[2];
+      document.getElementById('mh-ind').textContent = k[3];
+      document.getElementById('mh-kind').textContent = KIND[k[4]];
+      var sp = span(k[1]), note = 'Dates follow each exchange\u2019s official calendar and are updated every night. Regular trading hours.';
+      if (HOL && sp[1] < lastAll) note += ' Calendar published to ' + ml(sp[1]) + '.';
+      document.getElementById('mh-note').textContent = note;
+    }
+    function months(keep) {
+      var sp = span(sc.value), f = keep ? +sf.value : sp[0], t = keep ? +st.value : sp[0] + 2;
+      fill(sf, sp[0], sp[1], f); fill(st, sp[0], sp[1], Math.max(+sf.value, t));
+      guard(); showList(); info();
+    }
+    MK.forEach(function (k) { var o = sc.querySelector('option[value="' + k[1] + '"]'); if (!o) { o = document.createElement('option'); o.value = k[1]; sc.appendChild(o); } o.textContent = k[0]; });
+    sc.value = DEF;
+    sc.addEventListener('change', function () { months(false); });
+    sf.addEventListener('change', function () { guard(); showList(); });
+    st.addEventListener('change', function () { guard(); showList(); });
+    function parse(j) {
+      try {
+        if (!j || typeof j !== 'object' || !j.r || typeof j.r !== 'object') return null;
+        var out = { r: {}, h: {}, e: {} };
+        Object.keys(j.r).forEach(function (k) { var r = j.r[k]; if (/^[A-Z]{4}$/.test(k) && Array.isArray(r) && r.length === 2 && DRE.test(r[0]) && DRE.test(r[1])) out.r[k] = [r[0], r[1]]; });
+        Object.keys(out.r).forEach(function (k) {
+          var hs = {}, es = {};
+          if (j.h && Array.isArray(j.h[k]) && j.h[k].length < 400) j.h[k].forEach(function (d) { if (typeof d === 'string' && DRE.test(d)) hs[d] = 1; });
+          if (j.e && j.e[k] && typeof j.e[k] === 'object') Object.keys(j.e[k]).forEach(function (d) { var n = j.e[k][d]; if (DRE.test(d) && Number.isInteger(n) && n >= 0 && n <= 1440) es[d] = n; });
+          out.h[k] = hs; out.e[k] = es;
+        });
+        return out;
+      } catch (x) { return null; }
+    }
+    function ready(j) {
+      HOL = parse(j); failed = !HOL;
+      if (HOL) Object.keys(HOL.r).forEach(function (k) { lastAll = Math.max(lastAll, mi(HOL.r[k][1])); });
+      months(false);
+    }
+    months(false);
+    if (window.__LH_HOL) { ready(window.__LH_HOL); return; }
+    if (!window.fetch || location.protocol === 'file:') { failed = true; showList(); return; }
+    fetch('holidays.json', { cache: 'no-cache', credentials: 'omit' }).then(function (r) { return r.ok ? r.json() : null; }).then(ready).catch(function () { failed = true; showList(); });
   })();
 
   // library: Members' picks dots (phones)
