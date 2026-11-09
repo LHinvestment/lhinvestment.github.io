@@ -3256,8 +3256,6 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     });
   });
   document.addEventListener('click', function (e) { if (current && !root.contains(e.target)) closePop(); });
-  // a click on empty map (not a market, the card, or a control) closes the open card
-  root.addEventListener('click', function (e) { if (!current || dragged) return; if (e.target.closest && e.target.closest('.wm-dot, .wm-pop, .wm-zoom, button, select, label, a, input')) return; closePop(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && current) closePop(); });
 
   // ---- zoom: the region buttons move the map's viewBox smoothly ----
@@ -3375,11 +3373,16 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
   });
 
   // ---- by hand: drag to move, pinch (touch) or Ctrl + scroll / trackpad pinch to zoom ----
-  var ptrs = {}, nptr = 0, drag = null, pinch = null, dragged = false;
+  var ptrs = {}, nptr = 0, drag = null, pinch = null, dragged = false, lastType = 'mouse', sRaf = 0, sSync = false;
+  // redraw at most once per frame while a finger moves, so a fast slide never queues up work
+  function sched(sync) { sSync = sSync || sync; if (sRaf) return; sRaf = requestAnimationFrame(function () { sRaf = 0; applyView(); if (sSync) { sSync = false; syncSel(); } }); }
+  function resetPtrs() { ptrs = {}; nptr = 0; drag = null; pinch = null; root.classList.remove('dragging'); setTimeout(function () { dragged = false; }, 0); }
   function frac(e) { var r = stage.getBoundingClientRect(); return { x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height, w: r.width, h: r.height }; }
   function two() { var k = Object.keys(ptrs); return [ptrs[k[0]], ptrs[k[1]]]; }
   stage.addEventListener('pointerdown', function (e) {
     if (e.pointerType === 'mouse' && e.button !== 0) return;
+    lastType = e.pointerType || 'mouse';
+    if (e.isPrimary) { ptrs = {}; pinch = null; drag = null; }   // a first finger means no other finger is down: forget any stale one
     ptrs[e.pointerId] = { x: e.clientX, y: e.clientY }; nptr = Object.keys(ptrs).length;
     cancelAnimationFrame(anim); moving = false; wz = null;
     if (nptr === 1) { drag = { id: e.pointerId, x: e.clientX, y: e.clientY, vx: vb.x, vy: vb.y, on: false }; dragged = false; }
@@ -3398,7 +3401,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
       var q = two(), d = Math.hypot(q[0].x - q[1].x, q[0].y - q[1].y) || 1, mx = (q[0].x + q[1].x) / 2, my = (q[0].y + q[1].y) / 2;
       var nw = Math.max(MINW, Math.min(VW, pinch.w0 * pinch.d0 / d));
       vb = clampVb({ x: pinch.px - (mx - r.left) / r.width * nw, y: pinch.py - (my - r.top) / r.height * nw / ASPR, w: nw, h: nw / ASPR });
-      applyView(); syncSel(); e.preventDefault(); return;
+      sched(true); e.preventDefault(); return;
     }
     if (drag && drag.id === e.pointerId) {
       var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
@@ -3409,7 +3412,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
         root.classList.add('dragging');
       }
       vb = clampVb({ x: drag.vx - dx / r.width * vb.w, y: drag.vy - dy / r.height * vb.h, w: vb.w, h: vb.h });
-      applyView(); e.preventDefault();
+      sched(false); e.preventDefault();
     }
   });
   function endPtr(e) {
@@ -3417,10 +3420,23 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     delete ptrs[e.pointerId]; nptr = Object.keys(ptrs).length;
     if (nptr < 2) pinch = null;
     if (nptr === 1) { var k = Object.keys(ptrs)[0]; drag = { id: +k, x: ptrs[k].x, y: ptrs[k].y, vx: vb.x, vy: vb.y, on: true }; }
-    if (nptr === 0) { drag = null; root.classList.remove('dragging'); setTimeout(function () { dragged = false; }, 0); }
+    if (nptr === 0) { drag = null; root.classList.remove('dragging'); setTimeout(function () { dragged = false; }, 0); if (sRaf) { cancelAnimationFrame(sRaf); sRaf = 0; applyView(); if (sSync) { sSync = false; syncSel(); } } }
   }
+  // a quick, still tap on empty map (not a market or a control) closes the open card. It listens to the pointer itself,
+  // not to 'click', so it adds nothing to how touch screens treat the rest of the map.
+  var tap = null;
+  stage.addEventListener('pointerdown', function (e) { tap = e.isPrimary && !(e.target.closest && e.target.closest('.wm-dot, .wm-zoom, button')) ? { x: e.clientX, y: e.clientY, t: Date.now() } : null; });
+  stage.addEventListener('pointerup', function (e) {
+    var t = tap; tap = null;
+    if (!t || !current || dragged || nptr > 1) return;
+    if (Math.hypot(e.clientX - t.x, e.clientY - t.y) > 8 || Date.now() - t.t > 600) return;
+    closePop();
+  });
   stage.addEventListener('pointerup', endPtr);
   stage.addEventListener('pointercancel', endPtr);
+  // belt and braces: when every finger is off the screen, nothing may stay half-pressed
+  document.addEventListener('touchend', function (e) { if (!e.touches.length && nptr) resetPtrs(); }, { passive: true });
+  document.addEventListener('touchcancel', function () { if (nptr) resetPtrs(); }, { passive: true });
   // a drag that ends on a dot should not also open that dot
   stage.addEventListener('click', function (e) { if (dragged) { e.stopPropagation(); e.preventDefault(); } }, true);
   // Ctrl + scroll (a mouse wheel or a trackpad pinch): the zoom glides towards its target instead of jumping a step at a time
@@ -3450,6 +3466,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     }
   }, { passive: false });
   stage.addEventListener('dblclick', function (e) {
+    if (lastType !== 'mouse') return;      // on a touch screen a quick second tap must not zoom; the buttons and pinching do that
     if (e.target.closest && e.target.closest('.wm-dot')) return;
     var f = frac(e); zoomAt(1.8, f.x, f.y, true);
   });
@@ -3501,7 +3518,10 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
   try { if (localStorage.getItem('lh-wm-time') === 'local') { TM = 'local'; var tg = root.querySelector('.wm-tm'); if (tg) press(tg, 'local'); } } catch (x) {}
   setFoot(); fSync();
 
+  var lastRW = window.innerWidth;
   window.addEventListener('resize', function () {
+    if (window.innerWidth === lastRW && view !== 'list') { if (current) placePop(current); return; }   // phones fire 'resize' while the address bar slides; only a real width change needs a redraw
+    lastRW = window.innerWidth;
     var na = stageAspr();
     if (Math.abs(na - ASPR) > 0.001) { var cy = vb.y + vb.h / 2; ASPR = na; vb.h = vb.w / ASPR; vb.y = cy - vb.h / 2; vb = clampVb(vb); }
     applyView(); if (current) placePop(current);
