@@ -571,6 +571,7 @@ footer p:first-child { color: var(--band-fg); }
 .lib-mp figure { display: flex; flex-direction: column; }
 .lib-mp blockquote { flex: 1 1 auto; }
 .lib-mp-nav { display: none; }
+.lib-books, .lib-gl { overflow-anchor: none; }
 .lib-mp figcaption { font-size: 14px; font-weight: 600; color: var(--band-gold); }
 .lib-az { margin: 0 0 24px; }
 .lib-az-s, .lib-az-g { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -975,7 +976,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
   .wm-seg button { padding: 6px 11px; font-size: 12px; }
   /* the map runs edge to edge and a bit taller */
   .wm-wrap { margin-inline: calc(-1 * max(clamp(16px, 3.2vw, 48px), env(safe-area-inset-left, 0px))); }
-  .wm-stage { aspect-ratio: 1000 / 760; border: 0; border-radius: 0; background: transparent; }
+  .wm-stage { aspect-ratio: 1000 / 660; border: 0; border-radius: 0; background: transparent; }
   .wm-pop { margin-inline: max(clamp(16px, 3.2vw, 48px), env(safe-area-inset-left, 0px)); }
 }
 @media (max-width: 350px) { .wm-seg button { padding: 6px 9px; } .wm-fbtn { padding-left: 11px; } }
@@ -1986,8 +1987,9 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     prev.addEventListener('click', function () { if (page > 0) { page--; render(false); } });
     next.addEventListener('click', function () { page++; render(false); });
     if (mq.addEventListener) mq.addEventListener('change', reset); else if (mq.addListener) mq.addListener(reset);
-    var rzB = 0;
-    window.addEventListener('resize', function () { clearTimeout(rzB); rzB = setTimeout(function () { render(true); }, 150); });
+    var rzB = 0, lastWB = window.innerWidth;
+    // phones fire 'resize' while the address bar slides in and out; only a real width change needs a re-measure
+    window.addEventListener('resize', function () { if (window.innerWidth === lastWB) return; lastWB = window.innerWidth; clearTimeout(rzB); rzB = setTimeout(function () { render(true); }, 150); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { render(true); });
     render(true);
   })();
@@ -2038,8 +2040,9 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     if (mqG.addEventListener) mqG.addEventListener('change', resetLetter); else if (mqG.addListener) mqG.addListener(resetLetter);
     prev.addEventListener('click', function () { if (page > 0) { page--; render(false); } });
     next.addEventListener('click', function () { page++; render(false); });
-    var rzG = 0;
-    window.addEventListener('resize', function () { clearTimeout(rzG); rzG = setTimeout(function () { render(true); }, 150); });
+    var rzG = 0, lastWG = window.innerWidth;
+    // phones fire 'resize' while the address bar slides in and out; only a real width change needs a re-measure
+    window.addEventListener('resize', function () { if (window.innerWidth === lastWG) return; lastWG = window.innerWidth; clearTimeout(rzG); rzG = setTimeout(function () { render(true); }, 150); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { render(true); });
     render(true);
   })();
