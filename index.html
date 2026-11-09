@@ -613,7 +613,8 @@ footer p:first-child { color: var(--band-fg); }
 .lib-books { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 24px; }
 .lib-book { padding: 22px 22px 20px; border: 1px solid var(--gold-line); border-top: 3px solid var(--gold-text); border-radius: 6px; background: var(--surface); display: grid; gap: 7px; align-content: start; }
 .lib-book[hidden] { display: none; }
-.lib-empty { margin: 18px 0 0; color: var(--muted); }
+.lib-empty { grid-column: 1 / -1; margin: 18px 0 0; color: var(--muted); }
+.lib-empty[hidden] { display: none; }
 #members-picks .sec-head { grid-template-columns: minmax(0, 320px) minmax(0, 1fr); }
 @media (max-width: 760px) { #members-picks .sec-head { grid-template-columns: minmax(0, 1fr); } }
 .lib-mp { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
@@ -633,6 +634,7 @@ footer p:first-child { color: var(--band-fg); }
 .lib-az button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 .lib-pager { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 22px; }
 .lib-pager p { margin: 0; font-size: 13.5px; color: var(--muted); }
+@media (max-width: 480px) { .lib-pager { min-height: 46px; } }
 .lib-pgbtns { display: flex; gap: 8px; }
 .lib-pgbtns button { font-size: 13px; font-weight: 500; padding: 8px 16px; border: 1px solid var(--gold-line); border-radius: 999px; background: transparent; color: var(--fg); }
 .lib-pgbtns button:hover:not(:disabled) { border-color: var(--gold-text); }
@@ -882,6 +884,29 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
 :root[data-mode="dark"] #industries, :root[data-mode="dark"] #events, :root[data-mode="dark"] #holidays { background: var(--bg); }
 :root[data-mode="dark"] #what-we-do, :root[data-mode="dark"] #history, :root[data-mode="dark"] #principles, :root[data-mode="dark"] #pitch { background: var(--surface); }
 :root[data-mode="dark"] #performance .perf, :root[data-mode="dark"] #performance .perf-chart, :root[data-mode="dark"] #performance .monthly, :root[data-mode="dark"] #performance .pc-tip { background: var(--surface); }
+
+/* key ratios */
+#key-ratios .kt { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; }
+#key-ratios .kt button { padding: 8px 16px; border: 1px solid var(--gold-line); border-radius: 999px; background: transparent; font: 500 13px var(--font-display); letter-spacing: 0.02em; color: var(--fg); transition: background-color .2s, border-color .2s, color .2s; }
+#key-ratios .kt button:hover { border-color: var(--gold-text); }
+#key-ratios .kt button[aria-selected="true"] { background: var(--gold-text); border-color: var(--gold-text); color: var(--bg); }
+#key-ratios .kt button:focus-visible { outline: 2px solid var(--gold-text); outline-offset: 2px; }
+.kr { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-content: start; }
+.kr[hidden] { display: none !important; }
+.kr li { border: 1px solid var(--gold-line); border-top: 3px solid var(--gold-text); border-radius: 6px; padding: 20px 22px; background: var(--surface); }
+.kr h3 { font-family: var(--font-serif); font-size: 22px; font-weight: 600; margin: 0 0 2px; color: var(--gold-text); }
+.kr .n { display: block; font-size: 14px; font-weight: 500; color: var(--fg); margin: 0 0 6px; }
+.kr .f { display: block; font: 12px var(--font-mono); color: var(--muted); margin-bottom: 12px; }
+.kr p { margin: 0 0 8px; font-size: 14px; line-height: 1.5; color: var(--fg); }
+.kr p:last-child { margin-bottom: 0; }
+.kr b { display: block; font: 600 10.5px var(--font-display); letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-text); margin-bottom: 2px; }
+@media (max-width: 900px) { .kr { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) {
+  .kr { grid-template-columns: minmax(0, 1fr); }
+  #key-ratios .kt { flex-wrap: nowrap; overflow-x: auto; margin-inline: -16px; padding-inline: 16px; scrollbar-width: none; }
+  #key-ratios .kt::-webkit-scrollbar { display: none; }
+  #key-ratios .kt button { white-space: nowrap; flex: none; }
+}
 
 /* markets around the clock: world map with live open/closed exchanges */
 .sec-head.one { grid-template-columns: minmax(0, 1fr); margin-bottom: 24px; }
@@ -1182,7 +1207,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
       <a href="#top">Home</a>
       <a href="#strategy">Strategy</a>
       <a href="#events">Events</a>
-      <a href="#library">Library</a>
+      <a href="#resources">Resources</a>
     </nav>
     <div class="theme-menu">
       <button class="theme-toggle" id="theme-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list" aria-label="Appearance: Signature">
@@ -1630,9 +1655,9 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     <div class="s-motif" aria-hidden="true"><svg viewBox="0 0 900 640" preserveAspectRatio="xMidYMid slice"><use href="#contour"/></svg></div>
     <div class="wrap">
       <div class="s-copy">
-        <span class="label">What we read</span>
-        <h1 class="s-title">Reading list</h1>
-        <p>A short list of the best books on investing: value, valuation, risk and the psychology behind it all. For first steps and advanced work alike.</p>
+        <span class="label">Read, learn, look up</span>
+        <h1 class="s-title">Resources</h1>
+        <p>The best books on investing, the key ratios explained and a glossary of the terms investors use. For first steps and advanced work alike.</p>
       </div>
     </div>
   </section>
@@ -1663,6 +1688,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
         <span class="lib-sel"><select id="lib-level" aria-label="Filter by level"><option value="all">All levels</option><option value="start">Starting out</option><option value="core">Core</option><option value="adv">Advanced</option></select></span>
       </div>
       <div class="lib-books" id="lib-books">
+        <p class="lib-empty" id="lib-empty" hidden>No titles on this shelf at this level. Try another level.</p>
 <article class="lib-book" data-shelf="v" data-level="core"><h3>The Intelligent Investor</h3><div class="by">Benjamin Graham</div><p class="why">Margin of safety and Mr Market: the foundation of how we think.</p><div class="tagrow"><span class="tg lv">Core</span><span class="tg">Value investing</span></div></article>
 <article class="lib-book" data-shelf="v" data-level="core"><h3>Common Stocks and Uncommon Profits</h3><div class="by">Philip Fisher</div><p class="why">Qualitative research on a business, the counterpart to Graham&#x27;s numbers.</p><div class="tagrow"><span class="tg lv">Core</span><span class="tg">Value investing</span></div></article>
 <article class="lib-book" data-shelf="v" data-level="start"><h3>One Up on Wall Street</h3><div class="by">Peter Lynch</div><p class="why">How good ideas can come from everyday life, in plain language.</p><div class="tagrow"><span class="tg lv">Starting out</span><span class="tg">Value investing</span></div></article>
@@ -1689,7 +1715,6 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
 <article class="lib-book" data-shelf="m" data-level="adv"><h3>Poor Charlie&#x27;s Almanack</h3><div class="by">Charlie Munger</div><p class="why">Munger&#x27;s talks and mental models, for combining ideas from many fields.</p><div class="tagrow"><span class="tg lv">Advanced</span><span class="tg">Mindset &amp; history</span></div></article>
 <article class="lib-book" data-shelf="m" data-level="start"><h3>Richer, Wiser, Happier</h3><div class="by">William Green</div><p class="why">Interviews with great investors about how they think.</p><div class="tagrow"><span class="tg lv">Starting out</span><span class="tg">Mindset &amp; history</span></div></article>
       </div>
-      <p class="lib-empty" id="lib-empty" hidden>No titles on this shelf at this level. Try another level.</p>
       <div class="lib-pager">
         <p id="lib-count" aria-live="polite"></p>
         <div class="lib-pgbtns"><button type="button" id="lib-bprev">Previous</button><button type="button" id="lib-bnext">Next</button></div>
@@ -1713,6 +1738,21 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     </div>
   </section>
 
+  <section class="band" id="key-ratios">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Key ratios explained</h2>
+        <p>Twenty ratios we use most: what each one tells you and what it can hide. Related terms are in the Glossary below.</p>
+      </div>
+      <div class="kt" id="kr-tabs" role="tablist" aria-label="Ratio groups"><button type="button" data-g="0" role="tab" aria-selected="true">Valuation</button><button type="button" data-g="1" role="tab" aria-selected="false">Margins</button><button type="button" data-g="2" role="tab" aria-selected="false">Returns</button><button type="button" data-g="3" role="tab" aria-selected="false">Financial health</button><button type="button" data-g="4" role="tab" aria-selected="false">Dividends</button></div>
+      <ul class="kr" data-g="0" role="tabpanel"><li><h3>P/E ratio</h3><span class="n">Price-to-earnings ratio</span><span class="f">Share price ÷ earnings per share</span><p><b>Shows</b>How much investors pay for each euro of profit.</p><p><b>Hides</b>Misleads for cyclical firms, where earnings peak or collapse.</p></li><li><h3>P/B ratio</h3><span class="n">Price-to-book ratio</span><span class="f">Share price ÷ book value per share</span><p><b>Shows</b>Price against the net assets on the balance sheet.</p><p><b>Hides</b>Says little for asset-light businesses such as software.</p></li><li><h3>EV / Sales</h3><span class="n">Enterprise value to sales</span><span class="f">Enterprise value ÷ revenue</span><p><b>Shows</b>Value against revenue, useful when profit is still small.</p><p><b>Hides</b>Ignores how profitable the revenue is.</p></li><li><h3>EV / EBITDA</h3><span class="n">Enterprise value to EBITDA</span><span class="f">Enterprise value ÷ (earnings before interest, tax, depreciation and amortisation)</span><p><b>Shows</b>Compares companies with different debt levels and tax.</p><p><b>Hides</b>Ignores capital spending, so it flatters heavy industries.</p></li><li><h3>P / FCF</h3><span class="n">Price to free cash flow</span><span class="f">Market value ÷ free cash flow</span><p><b>Shows</b>The price paid for the cash a business really generates.</p><p><b>Hides</b>One delayed investment can make a year look better than it is.</p></li><li><h3>PEG ratio</h3><span class="n">Price/earnings to growth ratio</span><span class="f">P/E ÷ expected earnings growth</span><p><b>Shows</b>Puts the P/E in context of how fast profit is growing.</p><p><b>Hides</b>Depends on growth forecasts, which are often wrong.</p></li></ul>
+      <ul class="kr" data-g="1" role="tabpanel" hidden><li><h3>Gross margin</h3><span class="f">(Revenue − cost of sales) ÷ revenue</span><p><b>Shows</b>How much of each euro of sales is left after the direct cost of the product.</p><p><b>Hides</b>Leaves out running costs, so a high gross margin can still lose money.</p></li><li><h3>Operating margin</h3><span class="f">Operating profit ÷ revenue</span><p><b>Shows</b>Pricing power and how well costs are controlled.</p><p><b>Hides</b>Not comparable across sectors; a grocer is not a software firm.</p></li><li><h3>Net margin</h3><span class="f">Net income ÷ revenue</span><p><b>Shows</b>The share of sales that ends up as profit for shareholders.</p><p><b>Hides</b>One-off items, tax and interest can swing it from year to year.</p></li><li><h3>FCF margin</h3><span class="n">Free cash flow margin</span><span class="f">Free cash flow ÷ revenue</span><p><b>Shows</b>How much of sales turns into real cash.</p><p><b>Hides</b>Lumpy: one big investment year can make it look weak.</p></li></ul>
+      <ul class="kr" data-g="2" role="tabpanel" hidden><li><h3>ROA</h3><span class="n">Return on assets</span><span class="f">Net income ÷ total assets</span><p><b>Shows</b>How much profit a company makes from everything it owns.</p><p><b>Hides</b>Low by nature for asset-heavy businesses such as utilities.</p></li><li><h3>ROE</h3><span class="n">Return on equity</span><span class="f">Net income ÷ shareholders’ equity</span><p><b>Shows</b>The profit earned on the money shareholders have put in.</p><p><b>Hides</b>Debt inflates it; a heavily indebted firm can show a high ROE.</p></li><li><h3>ROCE</h3><span class="n">Return on capital employed</span><span class="f">Operating profit ÷ (total assets − current liabilities)</span><p><b>Shows</b>Profit made on all the capital in the business, debt included.</p><p><b>Hides</b>Goodwill from past acquisitions can drag it down.</p></li><li><h3>ROIC</h3><span class="n">Return on invested capital</span><span class="f">Operating profit after tax ÷ invested capital</span><p><b>Shows</b>Whether growth creates value above what the capital costs.</p><p><b>Hides</b>Easy to distort with write-offs and acquisitions.</p></li></ul>
+      <ul class="kr" data-g="3" role="tabpanel" hidden><li><h3>Debt / equity</h3><span class="f">Total debt ÷ shareholders’ equity</span><p><b>Shows</b>How much of the business is funded by borrowing.</p><p><b>Hides</b>Normal levels differ a lot between sectors.</p></li><li><h3>Current ratio</h3><span class="f">Current assets ÷ current liabilities</span><p><b>Shows</b>Whether a company can pay its bills over the next year.</p><p><b>Hides</b>A high figure can hide stock that will not sell.</p></li><li><h3>Interest cover</h3><span class="f">Operating profit ÷ interest paid</span><p><b>Shows</b>How comfortably profit covers the cost of debt.</p><p><b>Hides</b>Looks fine until profit falls, then drops quickly.</p></li><li><h3>Net debt / EBITDA</h3><span class="n">Net debt to EBITDA</span><span class="f">(Debt − cash) ÷ EBITDA</span><p><b>Shows</b>How many years of profit it would take to repay debt.</p><p><b>Hides</b>Looks safe at the top of a cycle and dangerous at the bottom.</p></li></ul>
+      <ul class="kr" data-g="4" role="tabpanel" hidden><li><h3>Dividend yield</h3><span class="f">Annual dividend per share ÷ share price</span><p><b>Shows</b>The cash income received for each euro invested.</p><p><b>Hides</b>A very high yield can mean the price has fallen because a cut is coming.</p></li><li><h3>Payout ratio</h3><span class="f">Dividends ÷ net income</span><p><b>Shows</b>How much of its profit a company pays out.</p><p><b>Hides</b>A high figure leaves little room to keep paying if profit falls.</p></li></ul>
+    </div>
+  </section>
+
   <section class="band alt">
     <div class="wrap">
       <div class="sec-head">
@@ -1731,14 +1771,17 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
         <div data-l="B"><dt>Bull market</dt><dd>A long period of rising market prices.</dd></div>
         <div data-l="C"><dt>Capital gain</dt><dd>The profit from selling an investment for more than it cost.</dd></div>
         <div data-l="C"><dt>Cash flow statement</dt><dd>Shows the cash that came into and left a company over a period, split into operations, investing and financing.</dd></div>
+        <div data-l="C"><dt>Compound annual growth rate (CAGR)</dt><dd>The average yearly growth rate of a figure such as revenue or profit over a period, as if it had grown at the same pace every year.</dd></div>
         <div data-l="C"><dt>Compound interest</dt><dd>Earning returns on past returns as well as on the original amount, so growth builds on itself over time.</dd></div>
         <div data-l="C"><dt>Correlation</dt><dd>How closely two investments move together. Low correlation between holdings helps spread risk.</dd></div>
         <div data-l="C"><dt>Current ratio</dt><dd>Current assets divided by current liabilities. Shows whether a company can pay its bills over the next year.</dd></div>
         <div data-l="D"><dt>Debt-to-equity ratio</dt><dd>Total debt divided by shareholders&#x27; equity. A higher figure means the company relies more on borrowed money.</dd></div>
+        <div data-l="D"><dt>Diluted earnings per share</dt><dd>Profit per share after counting every share that could be created from options and convertible securities. A stricter version of earnings per share.</dd></div>
         <div data-l="D"><dt>Discounted cash flow</dt><dd>A valuation that adds up the cash a business is expected to produce, reduced to today&#x27;s value because money later is worth less than money now.</dd></div>
         <div data-l="D"><dt>Diversification</dt><dd>Spreading money across different investments so that one failure does not sink the whole portfolio.</dd></div>
         <div data-l="D"><dt>Dividend</dt><dd>A share of a company&#x27;s profit paid out to its shareholders, usually in cash.</dd></div>
         <div data-l="D"><dt>Dividend payout ratio</dt><dd>The part of a company&#x27;s earnings paid out as dividends. A very high ratio can be hard to sustain.</dd></div>
+        <div data-l="D"><dt>Dividend per share (DPS)</dt><dd>The total dividend a company pays for each share it has issued over a year.</dd></div>
         <div data-l="D"><dt>Dividend yield</dt><dd>The yearly dividend divided by the share price. The cash return before any change in the price.</dd></div>
         <div data-l="D"><dt>Dollar-cost averaging</dt><dd>Investing a fixed amount at regular intervals, whatever the price, so that purchases are spread over time.</dd></div>
         <div data-l="D"><dt>Drawdown</dt><dd>The fall from a portfolio&#x27;s highest value to its lowest before it recovers. A measure of how bad the bad periods were.</dd></div>
@@ -1748,6 +1791,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
         <div data-l="E"><dt>ETF</dt><dd>Exchange-traded fund. A fund that holds a basket of assets, often an index, and trades on an exchange like a share.</dd></div>
         <div data-l="E"><dt>Expense ratio</dt><dd>The yearly cost of owning a fund, shown as a percentage of the money invested. Lower costs leave more of the return to the investor.</dd></div>
         <div data-l="F"><dt>Free cash flow</dt><dd>The cash a company produces after paying to run and maintain the business. What is left for its owners.</dd></div>
+        <div data-l="G"><dt>Gross margin</dt><dd>The share of revenue left after the direct cost of making the product or service, before running costs.</dd></div>
         <div data-l="G"><dt>Growth stock</dt><dd>A share in a company expected to grow sales and profits faster than average, often priced at a premium.</dd></div>
         <div data-l="H"><dt>Hedge fund</dt><dd>A privately run investment fund that uses flexible strategies, such as short selling and borrowing, in pursuit of returns.</dd></div>
         <div data-l="H"><dt>Hedging</dt><dd>Taking a position that offsets the risk of another investment, a bit like insurance against a loss.</dd></div>
@@ -1755,6 +1799,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
         <div data-l="I"><dt>Income statement</dt><dd>Shows a company&#x27;s revenue, costs and profit over a period.</dd></div>
         <div data-l="I"><dt>Index fund</dt><dd>A fund that aims to match an index such as the S&amp;P 500 rather than beat it, usually at low cost.</dd></div>
         <div data-l="I"><dt>Inflation</dt><dd>The general rise in prices over time, which reduces what each euro can buy.</dd></div>
+        <div data-l="I"><dt>Interest cover</dt><dd>Operating profit divided by interest paid. It shows how many times over a company could pay its interest from profit.</dd></div>
         <div data-l="J"><dt>Junk bond</dt><dd>A bond from a borrower with a low credit rating. It pays a higher yield because the risk of default is higher.</dd></div>
         <div data-l="K"><dt>KPI</dt><dd>Key performance indicator. A measure a company uses to track how the business is doing, such as sales growth or customer numbers.</dd></div>
         <div data-l="L"><dt>Liquidity</dt><dd>How easily an investment can be sold for cash without moving its price much.</dd></div>
@@ -1762,7 +1807,10 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
         <div data-l="M"><dt>Market capitalisation</dt><dd>The total value of a company&#x27;s shares: the share price multiplied by the number of shares.</dd></div>
         <div data-l="M"><dt>Moat</dt><dd>A lasting advantage, such as a brand, a cost edge or high switching costs, that protects a company&#x27;s profits from competitors.</dd></div>
         <div data-l="N"><dt>Net asset value</dt><dd>The value of a fund&#x27;s assets minus its liabilities, usually shown per unit or share.</dd></div>
+        <div data-l="N"><dt>Net debt</dt><dd>Total debt minus cash and cash equivalents. It shows what a company would still owe if it used all its cash to repay debt.</dd></div>
         <div data-l="N"><dt>Net income</dt><dd>A company&#x27;s profit after all costs, interest and taxes.</dd></div>
+        <div data-l="N"><dt>Net margin</dt><dd>Net income divided by revenue. The share of every euro of sales that ends up as profit for shareholders.</dd></div>
+        <div data-l="N"><dt>Next twelve months (NTM)</dt><dd>Figures that look ahead twelve months, based on analysts&rsquo; forecasts rather than reported results.</dd></div>
         <div data-l="O"><dt>Operating margin</dt><dd>Operating profit as a share of revenue. Shows how much a company keeps from each euro of sales before interest and tax.</dd></div>
         <div data-l="P"><dt>Price-to-book ratio</dt><dd>The share price divided by book value per share. Compares what the market pays with what the balance sheet shows.</dd></div>
         <div data-l="P"><dt>Price-to-earnings ratio</dt><dd>The share price divided by earnings per share. How much investors pay for each euro of profit.</dd></div>
@@ -1771,10 +1819,12 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
         <div data-l="R"><dt>Rebalancing</dt><dd>Adjusting a portfolio back to its target mix after price moves have shifted the weights.</dd></div>
         <div data-l="R"><dt>Return on equity</dt><dd>Net profit divided by shareholders&#x27; equity. How much profit a company makes on its owners&#x27; money.</dd></div>
         <div data-l="R"><dt>Return on invested capital</dt><dd>The profit a business earns on the money put into it. A high figure over many years usually points to a strong business.</dd></div>
+        <div data-l="S"><dt>Shares outstanding</dt><dd>The number of shares currently held by investors, including those held by insiders. Used to turn company totals into per-share figures.</dd></div>
         <div data-l="S"><dt>Sharpe ratio</dt><dd>A portfolio&#x27;s return above a risk-free rate, divided by its volatility. Shows how much return was earned for each unit of risk.</dd></div>
         <div data-l="S"><dt>Short selling</dt><dd>Selling a borrowed share in the hope of buying it back cheaper. The loss can be larger than the amount first invested.</dd></div>
         <div data-l="S"><dt>Stock split</dt><dd>A company divides its shares into more shares at a lower price. The company&#x27;s total value does not change.</dd></div>
         <div data-l="T"><dt>Total return</dt><dd>The full return on an investment: the price change plus any dividends or interest received.</dd></div>
+        <div data-l="T"><dt>Trailing twelve months (TTM)</dt><dd>Figures that add up the last four reported quarters, giving a full year that is always up to date.</dd></div>
         <div data-l="U"><dt>Undervalued</dt><dd>Trading below our estimate of what the company is worth.</dd></div>
         <div data-l="U"><dt>Unrealised gain</dt><dd>A profit on paper, on an investment that has not been sold yet.</dd></div>
         <div data-l="V"><dt>Value stock</dt><dd>A share that looks cheap compared with the company&#x27;s earnings, assets or cash flow.</dd></div>
@@ -1978,13 +2028,13 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
       window.scrollTo({ top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth' });
     });
   });
-  [].slice.call(document.querySelectorAll('a[href="#events"], a[href="#strategy"], a[href="#library"]')).forEach(function (a) {
+  [].slice.call(document.querySelectorAll('a[href="#events"], a[href="#strategy"], a[href="#resources"], a[href="#library"]')).forEach(function (a) {
     a.addEventListener('click', function (e) {
       e.preventDefault();
       var target = a.getAttribute('href');
       if (target === '#events') { go('events', '#events'); toTop(); }
       else if (target === '#strategy') { go('strategy', '#strategy'); toTop(); }
-      else if (target === '#library') { go('library', '#library'); toTop(); }
+      else if (target === '#resources' || target === '#library') { go('library', '#resources'); toTop(); }
       update();
     });
   });
@@ -2000,7 +2050,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     var h = location.hash;
     if (h === '#events') { showView('events'); toTop(); }
     else if (h === '#strategy') { showView('strategy'); toTop(); }
-    else if (h === '#library') { showView('library'); toTop(); }
+    else if (h === '#resources' || h === '#library') { showView('library'); toTop(); }
     else {
       var was = view;
       showView('home');
@@ -2012,9 +2062,9 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
   }
   window.addEventListener('popstate', sync);
   window.addEventListener('hashchange', sync);
-  if (location.hash === '#events' || location.hash === '#strategy' || location.hash === '#library') {
+  if (location.hash === '#events' || location.hash === '#strategy' || location.hash === '#resources' || location.hash === '#library') {
     view = 'home';
-    showView(location.hash.slice(1));
+    showView(location.hash === '#resources' ? 'library' : location.hash.slice(1));
     setTimeout(toTop, 0);
     window.addEventListener('load', function () { setTimeout(toTop, 0); });
   }
@@ -2037,16 +2087,25 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     var mq = window.matchMedia('(max-width: 760px)');
     var topic = document.getElementById('lib-topic');
     var shelf = 'all', level = 'all', page = 0;
-    // the list keeps the height of its tallest page, so the buttons never move when you turn the page
-    function fixHeight(list, size, pages) {
+    // the list keeps the height of its tallest page over every topic, level and page,
+    // so nothing below it moves when you change a filter or turn the page
+    function fixHeight() {
       wrap.style.minHeight = '';
-      if (pages < 2) return;
-      var mx = 0;
-      for (var p = 0; p < pages; p++) {
-        books.forEach(function (b) { b.hidden = true; });
-        list.slice(p * size, p * size + size).forEach(function (b) { b.hidden = false; });
-        mx = Math.max(mx, wrap.offsetHeight);
-      }
+      empty.hidden = true;
+      var size = mq.matches ? 8 : 9, mx = 0;
+      var shelves = ['all'].concat(chips.map(function (c) { return c.getAttribute('data-shelf'); }));
+      var levels = [].slice.call(sel.options).map(function (o) { return o.value; });
+      shelves.forEach(function (sh) { levels.forEach(function (lv) {
+        var list = books.filter(function (b) {
+          return (sh === 'all' || b.getAttribute('data-shelf') === sh) && (lv === 'all' || b.getAttribute('data-level') === lv);
+        });
+        var pages = Math.max(1, Math.ceil(list.length / size));
+        for (var p = 0; p < pages; p++) {
+          books.forEach(function (x) { x.hidden = true; });
+          list.slice(p * size, p * size + size).forEach(function (x) { x.hidden = false; });
+          mx = Math.max(mx, Math.ceil(wrap.getBoundingClientRect().height));
+        }
+      }); });
       wrap.style.minHeight = mx + 'px';
     }
     function render(re) {
@@ -2057,13 +2116,13 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
       var pages = Math.max(1, Math.ceil(list.length / size));
       if (page > pages - 1) page = pages - 1;
       var from = page * size, to = Math.min(list.length, from + size);
-      if (re) fixHeight(list, size, pages);
+      if (re) fixHeight();
       books.forEach(function (b) { b.hidden = true; });
       list.slice(from, to).forEach(function (b) { b.hidden = false; });
       count.textContent = list.length + (list.length === 1 ? ' title' : ' titles') + (pages > 1 ? ' \u00b7 page ' + (page + 1) + ' of ' + pages : '');
       empty.hidden = list.length !== 0;
       prev.disabled = page === 0; next.disabled = page >= pages - 1;
-      prev.parentNode.hidden = pages === 1;
+      prev.parentNode.style.visibility = pages === 1 ? 'hidden' : '';
     }
     function reset() { page = 0; render(true); }
     chips.forEach(function (c) { c.addEventListener('click', function () {
@@ -2088,6 +2147,36 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     render(true);
   })();
 
+  // resources: key ratios, one group at a time (same height on laptop and tablet so the page does not jump)
+  (function () {
+    var tabs = [].slice.call(document.querySelectorAll('#kr-tabs button'));
+    var lists = [].slice.call(document.querySelectorAll('#key-ratios .kr'));
+    if (!tabs.length) return;
+    var act = 0;
+    function fix() {
+      var wrap = lists[0].parentNode;
+      lists.forEach(function (l) { l.style.minHeight = ''; });
+      if (window.innerWidth <= 600 || libraryHidden()) return;
+      var mx = 0;
+      lists.forEach(function (l) { l.hidden = false; mx = Math.max(mx, Math.ceil(l.getBoundingClientRect().height)); l.hidden = true; });
+      lists[act].hidden = false;
+      lists.forEach(function (l) { l.style.minHeight = mx + 'px'; });
+    }
+    function libraryHidden() { var v = document.getElementById('view-library'); return !v || v.hidden; }
+    function show(n) {
+      act = n;
+      tabs.forEach(function (b, i) { b.setAttribute('aria-selected', i === n ? 'true' : 'false'); });
+      lists.forEach(function (l, i) { l.hidden = i !== n; });
+    }
+    tabs.forEach(function (b, i) { b.addEventListener('click', function () { show(i); }); });
+    var lastW = window.innerWidth, t = 0;
+    window.addEventListener('resize', function () { if (window.innerWidth === lastW) return; lastW = window.innerWidth; clearTimeout(t); t = setTimeout(fix, 150); });
+    window.addEventListener('hashchange', function () { setTimeout(fix, 60); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fix);
+    window.addEventListener('load', function () { setTimeout(fix, 60); });
+    fix();
+  })();
+
   // library: glossary, six terms at a time with a letter filter
   (function () {
     var dl = document.getElementById('lib-gl');
@@ -2098,15 +2187,20 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     var prev = document.getElementById('lib-prev'), next = document.getElementById('lib-next');
     var count = document.getElementById('lib-gl-count');
     var SIZE = 6, letter = 'all', page = 0;
-    function fixHeight(list, pages) {
+    // the glossary keeps the height of its tallest page over every letter and page
+    function fixHeight() {
       dl.style.minHeight = '';
-      if (pages < 2) return;
-      var mx = 0;
-      for (var p = 0; p < pages; p++) {
-        items.forEach(function (d) { d.hidden = true; });
-        list.slice(p * SIZE, p * SIZE + SIZE).forEach(function (d) { d.hidden = false; });
-        mx = Math.max(mx, dl.offsetHeight);
-      }
+      var mx = 0, seen = {};
+      btns.forEach(function (bt) { seen[bt.getAttribute('data-l')] = 1; });
+      Object.keys(seen).forEach(function (L) {
+        var list = items.filter(function (d) { return L === 'all' || L.indexOf(d.getAttribute('data-l')) > -1; });
+        var pages = Math.max(1, Math.ceil(list.length / SIZE));
+        for (var p = 0; p < pages; p++) {
+          items.forEach(function (d) { d.hidden = true; });
+          list.slice(p * SIZE, p * SIZE + SIZE).forEach(function (d) { d.hidden = false; });
+          mx = Math.max(mx, Math.ceil(dl.getBoundingClientRect().height));
+        }
+      });
       dl.style.minHeight = mx + 'px';
     }
     function render(re) {
@@ -2114,12 +2208,12 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
       var pages = Math.max(1, Math.ceil(list.length / SIZE));
       if (page > pages - 1) page = pages - 1;
       var from = page * SIZE, to = Math.min(list.length, from + SIZE);
-      if (re) fixHeight(list, pages);
+      if (re) fixHeight();
       items.forEach(function (d) { d.hidden = true; });
       list.slice(from, to).forEach(function (d) { d.hidden = false; });
       count.textContent = list.length + (list.length === 1 ? ' term' : ' terms') + (pages > 1 ? ' \u00b7 page ' + (page + 1) + ' of ' + pages : '');
       prev.disabled = page === 0; next.disabled = page >= pages - 1;
-      prev.parentNode.hidden = pages === 1;
+      prev.parentNode.style.visibility = pages === 1 ? 'hidden' : '';
     }
     btns.forEach(function (b) { b.addEventListener('click', function () {
       letter = b.getAttribute('data-l'); page = 0;
