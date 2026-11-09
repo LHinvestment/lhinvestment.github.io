@@ -877,6 +877,12 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
   .pc-plot.pre .pc-end { opacity: 0; }
 }
 
+/* dark mode: section backgrounds alternate navy / black by page */
+:root[data-mode="dark"] #performance, :root[data-mode="dark"] #markets, :root[data-mode="dark"] #world, :root[data-mode="dark"] #team,
+:root[data-mode="dark"] #industries, :root[data-mode="dark"] #events, :root[data-mode="dark"] #holidays { background: var(--bg); }
+:root[data-mode="dark"] #what-we-do, :root[data-mode="dark"] #history, :root[data-mode="dark"] #principles, :root[data-mode="dark"] #pitch { background: var(--surface); }
+:root[data-mode="dark"] #performance .perf, :root[data-mode="dark"] #performance .perf-chart, :root[data-mode="dark"] #performance .monthly, :root[data-mode="dark"] #performance .pc-tip { background: var(--surface); }
+
 /* markets around the clock: world map with live open/closed exchanges */
 .sec-head.one { grid-template-columns: minmax(0, 1fr); margin-bottom: 24px; }
 @media (min-width: 440px) { .sec-head.one h2 { white-space: nowrap; } }
