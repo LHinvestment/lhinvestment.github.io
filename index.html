@@ -909,6 +909,23 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
 }
 .lib-books, .lib-gl { align-content: start; }
 
+/* What we do: on phones the four items are a tap-to-open list */
+.wd-s { display: none; }
+@media (max-width: 760px) {
+  .wd-l { display: none; }
+  .wd-s { display: inline; }
+  #what-we-do .cards { display: block; border-top: 1px solid var(--gold-line); }
+  #what-we-do .card { position: relative; padding: 16px 40px 16px 0; border-top: 0; border-bottom: 1px solid var(--gold-line); cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  #what-we-do .card .label { margin-bottom: 4px; font-size: 10.5px; letter-spacing: 0.14em; }
+  #what-we-do .card h3 { font-size: 17px; line-height: 1.25; margin: 0; }
+  #what-we-do .card p { display: none; margin: 10px 0 0; font-size: 14.5px; line-height: 1.55; }
+  #what-we-do .card.open p { display: block; }
+  #what-we-do .card::before, #what-we-do .card::after { content: ""; position: absolute; right: 5px; top: 31px; width: 12px; height: 1.5px; background: var(--gold-text); }
+  #what-we-do .card::after { transform: rotate(90deg); }
+  #what-we-do .card.open::after { display: none; }
+  #what-we-do .card:focus-visible { outline: 2px solid var(--gold-text); outline-offset: 2px; }
+}
+
 /* markets around the clock: world map with live open/closed exchanges */
 .sec-head.one { grid-template-columns: minmax(0, 1fr); margin-bottom: 24px; }
 @media (min-width: 440px) { .sec-head.one h2 { white-space: nowrap; } }
@@ -1212,9 +1229,9 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     </nav>
     <div class="theme-menu">
       <button class="theme-toggle" id="theme-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list" aria-label="Appearance: Signature">
-        <svg class="ic-sig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg>
+        <svg class="ic-sig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>
         <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg>
-        <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>
+        <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 18.5h5M10.3 21h3.4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2v.5h5V16c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg>
       </button>
       <ul class="theme-list" id="theme-list" hidden>
         <li><button class="theme-opt" type="button" data-mode="signature" aria-pressed="true"><span class="sw sw-sig"></span><span class="name">Signature</span><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button></li>
@@ -1315,7 +1332,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     <div class="wrap">
     <div class="sec-head">
       <h2>What we do</h2>
-      <p>Our approach combines rigorous research, independent analysis and collective scrutiny to evaluate every investment opportunity before capital is committed.</p>
+      <p><span class="wd-l">Our approach combines rigorous research, independent analysis and collective scrutiny to evaluate every investment opportunity before capital is committed.</span><span class="wd-s">Rigorous research, independent analysis and collective scrutiny before any capital is committed.</span></p>
     </div>
     <div class="cards">
       <article class="card">
@@ -1680,8 +1697,8 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
   <section class="band" id="reading-list">
     <div class="wrap">
       <div class="sec-head">
-        <h2>The full list</h2>
-        <p>Twenty-five titles chosen by our members. Filter by topic or level.</p>
+        <h2>The Ultimate List</h2>
+        <p>25 greatest investment book titles chosen by our members.</p>
       </div>
       <div class="lib-bar">
         <div class="lib-chips" role="group" aria-label="Filter by topic"><button type="button" class="lib-chip" data-shelf="all" aria-pressed="true">All</button><button type="button" class="lib-chip" data-shelf="v" aria-pressed="false">Value investing</button><button type="button" class="lib-chip" data-shelf="b" aria-pressed="false">Business &amp; valuation</button><button type="button" class="lib-chip" data-shelf="f" aria-pressed="false">Statements &amp; risk</button><button type="button" class="lib-chip" data-shelf="p" aria-pressed="false">Portfolio &amp; markets</button><button type="button" class="lib-chip" data-shelf="m" aria-pressed="false">Mindset &amp; history</button></div>
@@ -1743,7 +1760,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     <div class="wrap">
       <div class="sec-head">
         <h2>Key ratios explained</h2>
-        <p>Twenty ratios we use most: what each one tells you and what it can hide. Related terms are in the Glossary below.</p>
+        <p>Twenty ratios we check before investment. Related terms are in the Glossary below.</p>
       </div>
       <div class="kt" id="kr-tabs" role="tablist" aria-label="Ratio groups"><button type="button" data-g="0" role="tab" aria-selected="true">Valuation</button><button type="button" data-g="1" role="tab" aria-selected="false">Margins</button><button type="button" data-g="2" role="tab" aria-selected="false">Returns</button><button type="button" data-g="3" role="tab" aria-selected="false">Financial health</button><button type="button" data-g="4" role="tab" aria-selected="false">Dividends</button></div>
       <ul class="kr" data-g="0" role="tabpanel"><li><h3>P/E ratio <span class="n">Price-to-earnings ratio</span></h3><span class="f">Share price ÷ earnings per share</span><p><b>Shows</b>How much investors pay for each euro of profit.</p><p><b>Hides</b>Misleads for cyclical firms, where earnings peak or collapse.</p></li><li><h3>P/B ratio <span class="n">Price-to-book ratio</span></h3><span class="f">Share price ÷ book value per share</span><p><b>Shows</b>Price against the net assets on the balance sheet.</p><p><b>Hides</b>Says little for asset-light businesses such as software.</p></li><li><h3>EV / Sales <span class="n">Enterprise value to sales</span></h3><span class="f">Enterprise value ÷ revenue</span><p><b>Shows</b>Value against revenue, useful when profit is still small.</p><p><b>Hides</b>Ignores how profitable the revenue is.</p></li><li><h3>EV / EBITDA <span class="n">Enterprise value to EBITDA</span></h3><span class="f">Enterprise value ÷ (earnings before interest, tax, depreciation and amortisation)</span><p><b>Shows</b>Compares companies with different debt levels and tax.</p><p><b>Hides</b>Ignores capital spending, so it flatters heavy industries.</p></li><li><h3>P / FCF <span class="n">Price to free cash flow</span></h3><span class="f">Market value ÷ free cash flow</span><p><b>Shows</b>The price paid for the cash a business really generates.</p><p><b>Hides</b>One delayed investment can make a year look better than it is.</p></li><li><h3>PEG ratio <span class="n">Price/earnings to growth ratio</span></h3><span class="f">P/E ÷ expected earnings growth</span><p><b>Shows</b>Puts the P/E in context of how fast profit is growing.</p><p><b>Hides</b>Depends on growth forecasts, which are often wrong.</p></li></ul>
@@ -1751,6 +1768,10 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
       <ul class="kr" data-g="2" role="tabpanel" hidden><li><h3>ROA <span class="n">Return on assets</span></h3><span class="f">Net income ÷ total assets</span><p><b>Shows</b>How much profit a company makes from everything it owns.</p><p><b>Hides</b>Low by nature for asset-heavy businesses such as utilities.</p></li><li><h3>ROE <span class="n">Return on equity</span></h3><span class="f">Net income ÷ shareholders’ equity</span><p><b>Shows</b>The profit earned on the money shareholders have put in.</p><p><b>Hides</b>Debt inflates it; a heavily indebted firm can show a high ROE.</p></li><li><h3>ROCE <span class="n">Return on capital employed</span></h3><span class="f">Operating profit ÷ (total assets − current liabilities)</span><p><b>Shows</b>Profit made on all the capital in the business, debt included.</p><p><b>Hides</b>Goodwill from past acquisitions can drag it down.</p></li><li><h3>ROIC <span class="n">Return on invested capital</span></h3><span class="f">Operating profit after tax ÷ invested capital</span><p><b>Shows</b>Whether growth creates value above what the capital costs.</p><p><b>Hides</b>Easy to distort with write-offs and acquisitions.</p></li></ul>
       <ul class="kr" data-g="3" role="tabpanel" hidden><li><h3>Debt / equity</h3><span class="f">Total debt ÷ shareholders’ equity</span><p><b>Shows</b>How much of the business is funded by borrowing.</p><p><b>Hides</b>Normal levels differ a lot between sectors.</p></li><li><h3>Current ratio</h3><span class="f">Current assets ÷ current liabilities</span><p><b>Shows</b>Whether a company can pay its bills over the next year.</p><p><b>Hides</b>A high figure can hide stock that will not sell.</p></li><li><h3>Interest cover</h3><span class="f">Operating profit ÷ interest paid</span><p><b>Shows</b>How comfortably profit covers the cost of debt.</p><p><b>Hides</b>Looks fine until profit falls, then drops quickly.</p></li><li><h3>Net debt / EBITDA</h3><span class="f">(Debt − cash) ÷ earnings before interest, tax, depreciation and amortisation</span><p><b>Shows</b>How many years of profit it would take to repay debt.</p><p><b>Hides</b>Looks safe at the top of a cycle and dangerous at the bottom.</p></li></ul>
       <ul class="kr" data-g="4" role="tabpanel" hidden><li><h3>Dividend yield</h3><span class="f">Annual dividend per share ÷ share price</span><p><b>Shows</b>The cash income received for each euro invested.</p><p><b>Hides</b>A very high yield can mean the price has fallen because a cut is coming.</p></li><li><h3>Payout ratio</h3><span class="f">Dividends ÷ net income</span><p><b>Shows</b>How much of its profit a company pays out.</p><p><b>Hides</b>A high figure leaves little room to keep paying if profit falls.</p></li></ul>
+      <div class="lib-pager" id="kr-pager">
+        <p id="kr-count" aria-live="polite"></p>
+        <div class="lib-pgbtns"><button type="button" id="kr-prev">Previous</button><button type="button" id="kr-next">Next</button></div>
+      </div>
     </div>
   </section>
 
@@ -2148,6 +2169,31 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     render(true);
   })();
 
+  // what we do: on phones the four items open and close on tap, one at a time
+  (function () {
+    var cards = [].slice.call(document.querySelectorAll('#what-we-do .card'));
+    if (!cards.length) return;
+    var mq = window.matchMedia('(max-width: 760px)');
+    function toggle(c) {
+      var open = !c.classList.contains('open');
+      cards.forEach(function (o) { o.classList.remove('open'); o.setAttribute('aria-expanded', 'false'); });
+      if (open) { c.classList.add('open'); c.setAttribute('aria-expanded', 'true'); }
+    }
+    cards.forEach(function (c) {
+      c.addEventListener('click', function () { if (mq.matches) toggle(c); });
+      c.addEventListener('keydown', function (e) { if (mq.matches && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); toggle(c); } });
+    });
+    function apply() {
+      cards.forEach(function (c, i) {
+        c.classList.remove('open');
+        if (mq.matches) { c.setAttribute('role', 'button'); c.setAttribute('tabindex', '0'); c.setAttribute('aria-expanded', i === 0 ? 'true' : 'false'); if (i === 0) c.classList.add('open'); }
+        else { c.removeAttribute('role'); c.removeAttribute('tabindex'); c.removeAttribute('aria-expanded'); }
+      });
+    }
+    if (mq.addEventListener) mq.addEventListener('change', apply); else if (mq.addListener) mq.addListener(apply);
+    apply();
+  })();
+
   // resources: key ratios, one group at a time (same height on laptop and tablet so the page does not jump)
   (function () {
     var tabs = [].slice.call(document.querySelectorAll('#kr-tabs button'));
@@ -2164,12 +2210,21 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
       lists.forEach(function (l) { l.style.minHeight = mx + 'px'; });
     }
     function libraryHidden() { var v = document.getElementById('view-library'); return !v || v.hidden; }
+    var kprev = document.getElementById('kr-prev'), knext = document.getElementById('kr-next'), kcount = document.getElementById('kr-count');
     function show(n) {
       act = n;
       tabs.forEach(function (b, i) { b.setAttribute('aria-selected', i === n ? 'true' : 'false'); });
       lists.forEach(function (l, i) { l.hidden = i !== n; });
+      kprev.disabled = n === 0; knext.disabled = n === tabs.length - 1;
+      kcount.textContent = tabs[n].textContent + ' \u00b7 ' + (n + 1) + ' of ' + tabs.length;
+      // on phones the tab row scrolls sideways: keep the chosen tab in view
+      var row = tabs[n].parentNode;
+      if (row.scrollWidth > row.clientWidth) row.scrollLeft = tabs[n].offsetLeft - (row.clientWidth - tabs[n].offsetWidth) / 2;
     }
+    kprev.addEventListener('click', function () { if (act > 0) show(act - 1); });
+    knext.addEventListener('click', function () { if (act < tabs.length - 1) show(act + 1); });
     tabs.forEach(function (b, i) { b.addEventListener('click', function () { show(i); }); });
+    show(0);
     var lastW = window.innerWidth, t = 0;
     window.addEventListener('resize', function () { if (window.innerWidth === lastW) return; lastW = window.innerWidth; clearTimeout(t); t = setTimeout(fix, 150); });
     window.addEventListener('hashchange', function () { setTimeout(fix, 60); });
