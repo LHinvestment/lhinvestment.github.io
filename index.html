@@ -570,6 +570,7 @@ footer p:first-child { color: var(--band-fg); }
 .lib-mp blockquote { margin: 0 0 12px; font-family: var(--font-display); font-size: 16.5px; line-height: 1.45; color: var(--band-fg); }
 .lib-mp figure { display: flex; flex-direction: column; }
 .lib-mp blockquote { flex: 1 1 auto; }
+.lib-mp-nav { display: none; }
 .lib-mp figcaption { font-size: 14px; font-weight: 600; color: var(--band-gold); }
 .lib-az { margin: 0 0 24px; }
 .lib-az-s, .lib-az-g { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -587,7 +588,7 @@ footer p:first-child { color: var(--band-fg); }
 .lib-az button:focus-visible, .lib-pgbtns button:focus-visible { outline: 2px solid var(--gold-text); outline-offset: 2px; }
 .lib-gl > div[hidden] { display: none; }
 .lib-pgbtns[hidden] { display: none; }
-@media (min-width: 761px) { .lib-gl { min-height: 345px; align-content: start; } }
+@media (min-width: 761px) { .lib-gl { align-content: start; } }
 .lib-gl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; margin: 0; border-top: 1px solid var(--gold-line); }
 .lib-gl > div { padding: 16px 0; border-bottom: 1px solid var(--gold-line); }
 .lib-gl dt { font-family: var(--font-display); font-size: 18px; font-weight: 600; margin: 0 0 4px; }
@@ -624,11 +625,23 @@ footer p:first-child { color: var(--band-fg); }
   .lib-shelf .no { font-size: 18px; }
   .lib-shelf h3 { font-size: 13.5px; line-height: 1.2; overflow-wrap: break-word; }
   .lib-shelf .by { font-size: 11.5px; line-height: 1.3; }
-  .lib-shelf .why, .lib-shelf .tagrow { display: none; }
+  .lib-shelf .why { font-size: 12px; line-height: 1.35; margin-top: 2px; }
+  .lib-shelf .tagrow { display: none; }
   /* Members' picks: one row you swipe sideways, the next card peeking in */
   .lib-mp { display: flex; grid-template-columns: none; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none;
     margin-inline: calc(-1 * clamp(16px, 3.2vw, 48px)); padding-inline: clamp(16px, 3.2vw, 48px); scroll-padding-inline: clamp(16px, 3.2vw, 48px); }
   .lib-mp::-webkit-scrollbar { display: none; }
+  .lib-mp-nav { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 16px; }
+  .lib-mp-nav button { all: unset; box-sizing: border-box; width: 8px; height: 8px; border-radius: 4px; border: 1px solid var(--band-muted); cursor: pointer; transition: width 200ms ease, background-color 200ms ease, border-color 200ms ease; }
+  .lib-mp-nav button.on { width: 22px; background: var(--band-gold); border-color: var(--band-gold); }
+  .lib-mp-hint { margin-left: 10px; display: inline-flex; align-items: center; gap: 5px; font-size: 12px; letter-spacing: .04em; color: var(--band-muted); }
+  .lib-mp-hint svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+}
+@media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+  .lib-mp-hint svg { animation: lib-nudge 1.6s ease-in-out infinite; }
+  @keyframes lib-nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+}
+@media (max-width: 760px) {
   .lib-mp figure { flex: 0 0 82%; scroll-snap-align: start; }
   .lib-mp:focus-visible { outline: 2px solid var(--band-gold); outline-offset: 4px; }
   .lib-books, .lib-gl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -640,13 +653,15 @@ footer p:first-child { color: var(--band-fg); }
   .lib-book h3 { font-size: 15px; }
   .lib-book .by { font-size: 12.5px; }
   .lib-book .why { font-size: 13px; line-height: 1.45; }
-  .lib-book .tg { font-size: 10px; padding: 3px 6px; letter-spacing: .05em; }
-  .lib-book .tagrow { gap: 5px; }
+  .lib-book .tg { font-size: 9.5px; padding: 3px 6px; letter-spacing: .03em; white-space: nowrap; }
+  .lib-book .tagrow { flex-direction: column; align-items: flex-start; gap: 5px; }
   .lib-bar { gap: 8px; }
   .lib-sel { flex: 1 1 0; min-width: 0; }
   .lib-sel select { width: 100%; padding-left: 12px; }
   .lib-az-g button { padding: 0 4px; }
 }
+@media (max-width: 399px) { .lib-book .tg { font-size: 9px; letter-spacing: .02em; padding: 3px 5px; } }
+@media (max-width: 359px) { .lib-book .tg { white-space: normal; } }
 @media (max-width: 350px) {
   .lib-shelf { gap: 6px; }
   .lib-shelf article { padding: 10px 8px 11px; }
@@ -960,7 +975,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
   .wm-seg button { padding: 6px 11px; font-size: 12px; }
   /* the map runs edge to edge and a bit taller */
   .wm-wrap { margin-inline: calc(-1 * max(clamp(16px, 3.2vw, 48px), env(safe-area-inset-left, 0px))); }
-  .wm-stage { aspect-ratio: 1000 / 590; border: 0; border-radius: 0; background: transparent; }
+  .wm-stage { aspect-ratio: 1000 / 760; border: 0; border-radius: 0; background: transparent; }
   .wm-pop { margin-inline: max(clamp(16px, 3.2vw, 48px), env(safe-area-inset-left, 0px)); }
 }
 @media (max-width: 350px) { .wm-seg button { padding: 6px 9px; } .wm-fbtn { padding-left: 11px; } }
@@ -1571,9 +1586,9 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
         <p>New to investing? These three, in this order, give the strongest foundation.</p>
       </div>
 <div class="lib-shelf">
-<article><span class="no">1</span><h3>The Psychology of Money</h3><div class="by">Morgan Housel</div><p class="why">Behaviour matters more than intelligence.</p><div class="tagrow"><span class="tg lv">Starting out</span><span class="tg">Mindset &amp; history</span></div></article>
-<article><span class="no">2</span><h3>The Intelligent Investor</h3><div class="by">Benjamin Graham</div><p class="why">Margin of safety and Mr Market: the foundation of how we think.</p><div class="tagrow"><span class="tg lv">Core</span><span class="tg">Value investing</span></div></article>
-<article><span class="no">3</span><h3>The Little Book of Valuation</h3><div class="by">Aswath Damodaran</div><p class="why">A short first introduction to valuing any company.</p><div class="tagrow"><span class="tg lv">Starting out</span><span class="tg">Business &amp; valuation</span></div></article>
+<article><span class="no">1</span><h3>The Psychology of Money</h3><div class="by">Morgan Housel</div><p class="why">Behaviour matters more than intelligence.</p><div class="tagrow"><span class="tg">Mindset &amp; history</span></div></article>
+<article><span class="no">2</span><h3>The Intelligent Investor</h3><div class="by">Benjamin Graham</div><p class="why">Margin of safety and Mr Market: the foundation of how we think.</p><div class="tagrow"><span class="tg">Value investing</span></div></article>
+<article><span class="no">3</span><h3>The Little Book of Valuation</h3><div class="by">Aswath Damodaran</div><p class="why">A short first introduction to valuing any company.</p><div class="tagrow"><span class="tg">Business &amp; valuation</span></div></article>
 </div>
     </div>
   </section>
@@ -1636,6 +1651,7 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
         <figure><blockquote>&ldquo;The best protection against my own overconfidence. I now ask whether a result was skill or luck before I celebrate it.&rdquo;</blockquote><figcaption>Fooled by Randomness</figcaption></figure>
         <figure><blockquote>&ldquo;It made me realise that how I behave with money matters more than how much I know.&rdquo;</blockquote><figcaption>The Psychology of Money</figcaption></figure>
       </div>
+      <div class="lib-mp-nav" aria-hidden="true"><button type="button" tabindex="-1" class="on"></button><button type="button" tabindex="-1"></button><button type="button" tabindex="-1"></button><span class="lib-mp-hint">Swipe <svg viewBox="0 0 16 16"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg></span></div>
     </div>
   </section>
 
@@ -1925,8 +1941,20 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     var prev = document.getElementById('lib-bprev'), next = document.getElementById('lib-bnext');
     var mq = window.matchMedia('(max-width: 760px)');
     var topic = document.getElementById('lib-topic');
-    var shelf = 'all', level = 'all', page = 0, maxH = 0;
-    function render() {
+    var shelf = 'all', level = 'all', page = 0;
+    // the list keeps the height of its tallest page, so the buttons never move when you turn the page
+    function fixHeight(list, size, pages) {
+      wrap.style.minHeight = '';
+      if (pages < 2) return;
+      var mx = 0;
+      for (var p = 0; p < pages; p++) {
+        books.forEach(function (b) { b.hidden = true; });
+        list.slice(p * size, p * size + size).forEach(function (b) { b.hidden = false; });
+        mx = Math.max(mx, wrap.offsetHeight);
+      }
+      wrap.style.minHeight = mx + 'px';
+    }
+    function render(re) {
       var list = books.filter(function (b) {
         return (shelf === 'all' || b.getAttribute('data-shelf') === shelf) && (level === 'all' || b.getAttribute('data-level') === level);
       });
@@ -1934,20 +1962,15 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
       var pages = Math.max(1, Math.ceil(list.length / size));
       if (page > pages - 1) page = pages - 1;
       var from = page * size, to = Math.min(list.length, from + size);
-      wrap.style.minHeight = '';
+      if (re) fixHeight(list, size, pages);
       books.forEach(function (b) { b.hidden = true; });
       list.slice(from, to).forEach(function (b) { b.hidden = false; });
       count.textContent = list.length + (list.length === 1 ? ' title' : ' titles') + (pages > 1 ? ' \u00b7 page ' + (page + 1) + ' of ' + pages : '');
       empty.hidden = list.length !== 0;
       prev.disabled = page === 0; next.disabled = page >= pages - 1;
       prev.parentNode.hidden = pages === 1;
-      // keep the list the same height from page to page, so the buttons stay put
-      if (pages > 1) {
-        if (to - from === size) maxH = Math.max(maxH, wrap.offsetHeight);
-        if (maxH) wrap.style.minHeight = maxH + 'px';
-      }
     }
-    function reset() { page = 0; maxH = 0; render(); }
+    function reset() { page = 0; render(true); }
     chips.forEach(function (c) { c.addEventListener('click', function () {
       shelf = c.getAttribute('data-shelf');
       chips.forEach(function (o) { o.setAttribute('aria-pressed', o === c ? 'true' : 'false'); });
@@ -1960,10 +1983,13 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
       reset();
     });
     sel.addEventListener('change', function () { level = sel.value; reset(); });
-    prev.addEventListener('click', function () { if (page > 0) { page--; render(); } });
-    next.addEventListener('click', function () { page++; render(); });
+    prev.addEventListener('click', function () { if (page > 0) { page--; render(false); } });
+    next.addEventListener('click', function () { page++; render(false); });
     if (mq.addEventListener) mq.addEventListener('change', reset); else if (mq.addListener) mq.addListener(reset);
-    render();
+    var rzB = 0;
+    window.addEventListener('resize', function () { clearTimeout(rzB); rzB = setTimeout(function () { render(true); }, 150); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { render(true); });
+    render(true);
   })();
 
   // library: glossary, six terms at a time with a letter filter
@@ -1976,11 +2002,23 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     var prev = document.getElementById('lib-prev'), next = document.getElementById('lib-next');
     var count = document.getElementById('lib-gl-count');
     var SIZE = 6, letter = 'all', page = 0;
-    function render() {
+    function fixHeight(list, pages) {
+      dl.style.minHeight = '';
+      if (pages < 2) return;
+      var mx = 0;
+      for (var p = 0; p < pages; p++) {
+        items.forEach(function (d) { d.hidden = true; });
+        list.slice(p * SIZE, p * SIZE + SIZE).forEach(function (d) { d.hidden = false; });
+        mx = Math.max(mx, dl.offsetHeight);
+      }
+      dl.style.minHeight = mx + 'px';
+    }
+    function render(re) {
       var list = items.filter(function (d) { return letter === 'all' || letter.indexOf(d.getAttribute('data-l')) > -1; });
       var pages = Math.max(1, Math.ceil(list.length / SIZE));
       if (page > pages - 1) page = pages - 1;
       var from = page * SIZE, to = Math.min(list.length, from + SIZE);
+      if (re) fixHeight(list, pages);
       items.forEach(function (d) { d.hidden = true; });
       list.slice(from, to).forEach(function (d) { d.hidden = false; });
       count.textContent = list.length + (list.length === 1 ? ' term' : ' terms') + (pages > 1 ? ' \u00b7 page ' + (page + 1) + ' of ' + pages : '');
@@ -1990,17 +2028,42 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     btns.forEach(function (b) { b.addEventListener('click', function () {
       letter = b.getAttribute('data-l'); page = 0;
       btns.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
-      render();
+      render(true);
     }); });
     function resetLetter() {
       letter = 'all'; page = 0;
       btns.forEach(function (o) { o.setAttribute('aria-pressed', o.getAttribute('data-l') === 'all' ? 'true' : 'false'); });
-      render();
+      render(true);
     }
     if (mqG.addEventListener) mqG.addEventListener('change', resetLetter); else if (mqG.addListener) mqG.addListener(resetLetter);
-    prev.addEventListener('click', function () { if (page > 0) { page--; render(); } });
-    next.addEventListener('click', function () { page++; render(); });
-    render();
+    prev.addEventListener('click', function () { if (page > 0) { page--; render(false); } });
+    next.addEventListener('click', function () { page++; render(false); });
+    var rzG = 0;
+    window.addEventListener('resize', function () { clearTimeout(rzG); rzG = setTimeout(function () { render(true); }, 150); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { render(true); });
+    render(true);
+  })();
+
+  // library: Members' picks dots (phones)
+  (function () {
+    var mp = document.querySelector('.lib-mp');
+    if (!mp) return;
+    var figs = [].slice.call(mp.children), dots = [].slice.call(document.querySelectorAll('.lib-mp-nav button'));
+    var rd = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function pad() { return parseFloat(getComputedStyle(mp).paddingLeft) || 0; }
+    function upd() {
+      var r = mp.getBoundingClientRect().left + pad(), idx = 0, best = 1e9;
+      figs.forEach(function (f, k) { var d = Math.abs(f.getBoundingClientRect().left - r); if (d < best) { best = d; idx = k; } });
+      if (mp.scrollLeft + mp.clientWidth >= mp.scrollWidth - 2) idx = figs.length - 1;
+      dots.forEach(function (d, k) { d.classList.toggle('on', k === idx); });
+    }
+    mp.addEventListener('scroll', upd, { passive: true });
+    dots.forEach(function (d, k) { d.addEventListener('click', function () {
+      var r = mp.getBoundingClientRect().left + pad();
+      mp.scrollTo({ left: mp.scrollLeft + figs[k].getBoundingClientRect().left - r, behavior: rd ? 'auto' : 'smooth' });
+    }); });
+    window.addEventListener('resize', upd);
+    upd();
   })();
 
   // performance bars grow once the chart is in view
@@ -2942,7 +3005,12 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
   // ---- zoom: the region buttons move the map's viewBox smoothly ----
   var VIEWS = {world: [0, 0, 1000], namerica: [80.6, 65.3, 353.3], samerica: [137.8, 249.8, 432.2], eume: [409.7, 67.6, 337.7], asia: [590.9, 118.2, 409.1], afoc: [491.9, 255.8, 508.1]};
   var ASPR = VW / VH;   // width / height of the stage; the phone stage is taller than the desktop one
-  function stageAspr() { var w = stage.clientWidth, h = stage.clientHeight; return w > 0 && h > 0 ? w / h : VW / VH; }
+  // the map always uses the same view shape; on a phone the taller stage simply stretches it vertically
+  function stageAspr() { return VW / VH; }
+  var mqStretch = window.matchMedia ? window.matchMedia('(max-width: 760px)') : { matches: false };
+  function setStretch() { svg.setAttribute('preserveAspectRatio', mqStretch.matches ? 'none' : 'xMidYMid meet'); }
+  setStretch();
+  if (mqStretch.addEventListener) mqStretch.addEventListener('change', setStretch);
   ASPR = stageAspr();
   var vb = { x: 0, y: 0, w: VW, h: VW / ASPR }, anim = 0, moving = false;
   vb.y = (VH - vb.h) / 2;
