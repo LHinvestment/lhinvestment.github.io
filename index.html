@@ -3256,6 +3256,8 @@ table.mt tbody tr:last-child th, table.mt tbody tr:last-child td { border-bottom
     });
   });
   document.addEventListener('click', function (e) { if (current && !root.contains(e.target)) closePop(); });
+  // a click on empty map (not a market, the card, or a control) closes the open card
+  root.addEventListener('click', function (e) { if (!current || dragged) return; if (e.target.closest && e.target.closest('.wm-dot, .wm-pop, .wm-zoom, button, select, label, a, input')) return; closePop(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && current) closePop(); });
 
   // ---- zoom: the region buttons move the map's viewBox smoothly ----
