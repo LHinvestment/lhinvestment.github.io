@@ -1,28 +1,28 @@
 {
-  "as_of": "2026-11-10",
+  "as_of": "2026-11-11",
   "start": "2026-01-02",
   "currency": "USD",
   "portfolio": {
-    "ytd": 0.1241
+    "ytd": 0.1869
   },
   "benchmarks": [
     {
       "id": "sp500",
       "name": "S&P 500",
       "short": "S&P 500",
-      "ytd": 0.0977
+      "ytd": 0.1122
     },
     {
       "id": "msci_world",
       "name": "Global market (MSCI World)",
       "short": "MSCI World",
-      "ytd": 0.093
+      "ytd": 0.1044
     }
   ],
   "allocation": {
-    "cash": 0.3356,
-    "semicon": 0.4162,
-    "software": 0.2481
+    "cash": 0.3179,
+    "semicon": 0.441,
+    "software": 0.2411
   },
   "benchmark_note": "Index figures are the price returns of the funds that track each index."
 }
